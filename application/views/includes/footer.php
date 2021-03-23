@@ -30,6 +30,11 @@
                 <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/dataTables.buttons.min.js"></script>
                 <script src="<?=base_url()?>app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
                 <script src="<?=base_url()?>app-assets/vendors/js/extensions/toastr.min.js"></script>
+				<script src="<?=base_url()?>app-assets/vendors/js/forms/select/select2.full.min.js"></script>
+				<script src="<?=base_url()?>app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+				<script src="<?=base_url()?>app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
+				<script src="<?=base_url()?>app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>
+				<script src="<?=base_url()?>app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
 				<!-- END: Page Vendor JS-->
 
 				<!-- BEGIN: Theme JS-->
@@ -37,6 +42,7 @@
 				<script src="<?=base_url()?>app-assets/js/core/app-menu.js"></script>
 				<script src="<?=base_url()?>app-assets/js/core/app.js"></script>
                 <script src="<?=base_url()?>app-assets/js/scripts/components.js"></script>
+				<script src="<?=base_url()?>app-assets/js/scripts/footer.js"></script>
 				<!-- END: Theme JS-->
 
 				<!-- BEGIN: Page JS-->

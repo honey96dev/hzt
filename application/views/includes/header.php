@@ -21,6 +21,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/ui/prism.min.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/tables/datatable/datatables.min.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/extensions/toastr.css">
+	<link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/forms/select/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/pickers/pickadate/pickadate.css">
+	<link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/pickers/daterange/daterangepicker.css">
 	<!-- END: Vendor CSS-->
 
 	<!-- BEGIN: Theme CSS-->
@@ -46,7 +49,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+<body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static  menu-collapsed" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 	<!-- BEGIN: Header-->
 	<div class="header-navbar-shadow"></div>
 	<nav class="header-navbar main-header-navbar navbar-expand-lg navbar navbar-with-menu fixed-top ">
