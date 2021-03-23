@@ -49,7 +49,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static  menu-collapsed" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+<body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 	<!-- BEGIN: Header-->
 	<div class="header-navbar-shadow"></div>
 	<nav class="header-navbar main-header-navbar navbar-expand-lg navbar navbar-with-menu fixed-top ">
@@ -96,14 +96,24 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<li class="dropdown dropdown-user nav-item">
 							<a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
 								<div class="user-nav d-sm-flex d-none">
-									<span class="user-name">John Doe</span>
-									<span class="user-status">Available</span>
+									<span class="user-name"><?= $this->session->user['first_name'] . ' ' . $this->session->user['surname'] ?></span>
+									<?php if (is_admin()): ?>
+										<span class="user-status">Administrator</span>
+									<?php else:?>
+										<span class="user-status">Customer</span>
+									<?php endif;?>
 								</div>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" href="#">
-									<i class="bx bx-envelope mr-50"></i> My Bills
-								</a>
+								<?php if (is_admin()): ?>
+									<a class="dropdown-item" href="#">
+										<i class="bx bx-envelope mr-50"></i> Goal Status
+									</a>
+								<?php else:?>
+									<a class="dropdown-item" href="#">
+										<i class="bx bx-envelope mr-50"></i> My Bills
+									</a>
+								<?php endif;?>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="<?= base_url('auth/logout')?>">
 									<i class="bx bx-power-off mr-50"></i> Logout
@@ -159,7 +169,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					</a>
 				</li>
                 <li class="nav-item <?= isset($menu) && $menu == "goals" ? "active" : "" ?>">
-					<a href="<?=site_url()?>html/ltr/vertical-menu-template/index.html">
+					<a href="<?=site_url('goals')?>">
 						<i class="menu-livicon" data-icon="coins"></i>
 						<span class="menu-title" data-i18n="">Goals</span>
 						<span class="badge badge-light-success badge-pill badge-round float-right">2</span>

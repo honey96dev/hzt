@@ -15,4 +15,12 @@ function show_date($date_str) {
 function show_datetime($datetime_str) {
     return date("j F, Y, g:i a", (int)strtotime($datetime_str));
 }
+
+function is_admin() {
+    $CI =& get_instance();
+    if (!$CI->session->has_userdata('user') || !$CI->session->user['role']) {
+        return false;
+    }
+    return true;
+}
 ?>

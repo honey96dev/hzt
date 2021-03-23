@@ -7,6 +7,7 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->model('auth_model', 'auth');
+        $this->load->model('customers_model', 'customers');
     }
 
     public function index()
@@ -28,7 +29,6 @@ class Auth extends CI_Controller
             $login_data = $this->input->post();
             $result = $this->auth->verify_user($login_data);
             echo json_encode($result);
-            return;
         } else {
             echo json_encode(['result' => 'error']);
         }
@@ -37,16 +37,49 @@ class Auth extends CI_Controller
 
     public function signup()
     {
+        $data = [
+            'signin_url' => base_url('auth'),
+            'signup_action_url' => base_url('auth/signup_action'),
+        ];
 
+        $this->load->view('includes/blank_header');
+        $this->load->view('auth/signup', $data);
+        $this->load->view('includes/blank_footer');
+    }
+
+    public function signup_action()
+    {
+        if ($this->input->post()) {
+            $signup_data = $this->input->post();
+            $result = $this->auth->signup($signup_data);
+            echo json_encode($result);
+        } else {
+            echo json_encode(['result' => 'error']);
+        }
+        return;
     }
 
     public function forgot()
     {
+        $data = [
+			'signin_url' => base_url('auth'),
+			'signup_url' => base_url('auth/signup'),
+            'forgot_action_url' => base_url('auth/forgot_action'),
+        ];
+
+        $this->load->view('includes/blank_header');
+        $this->load->view('auth/forgot', $data);
+        $this->load->view('includes/blank_footer');
+    }
+
+    public function forgot_action()
+    {
 
     }
 
-	public function logout() {
-		$this->session->sess_destroy();
-		redirect(base_url('auth'));
-	}
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect(base_url('auth'));
+    }
 }

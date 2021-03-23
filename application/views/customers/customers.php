@@ -23,6 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								<th>Email</th>
 								<th>Goal</th>
 								<th>Status</th>
+								<th>Role</th>
 								<th>Registed Date</th>
 								<th></th>
 							</tr>
@@ -30,7 +31,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<tbody>
 						<?php if (empty($customers)):?>
 							<tr>
-								<td colspan=6>There are no cutomers.</td>
+								<td colspan=7>There are no cutomers.</td>
 							</tr>
 						<?php else: ?>
 							<?php foreach($customers as $customer) :?>
@@ -40,6 +41,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									<td>$<?= $customer['goal'] ?></td>
 									<td class="<?= $customer['status'] ? 'text-success' : 'text-danger'?>">
 										<?= $customer['status'] ? 'Active' : 'Pending'?>
+									</td>
+									<td class="text-primary">
+										<?= $customer['role'] ? 'Admin' : ''?>
 									</td>
 									<td><?= show_datetime($customer['created_at']) ?></td>
 									<td>
@@ -62,6 +66,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								<th>Email</th>
 								<th>Goal</th>
 								<th>Status</th>
+								<th>Role</th>
 								<th>Registed Date</th>
 								<th></th>
 							</tr>
