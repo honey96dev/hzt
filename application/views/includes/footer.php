@@ -25,12 +25,18 @@
 
 				<!-- BEGIN: Page Vendor JS-->
 				<script src="<?=base_url()?>app-assets/vendors/js/ui/prism.min.js"></script>
+                <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+                <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
+                <script src="<?=base_url()?>app-assets/vendors/js/tables/datatable/dataTables.buttons.min.js"></script>
+                <script src="<?=base_url()?>app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
+                <script src="<?=base_url()?>app-assets/vendors/js/extensions/toastr.min.js"></script>
 				<!-- END: Page Vendor JS-->
 
 				<!-- BEGIN: Theme JS-->
 				<script src="<?=base_url()?>app-assets/js/scripts/configs/vertical-menu-light.js"></script>
 				<script src="<?=base_url()?>app-assets/js/core/app-menu.js"></script>
 				<script src="<?=base_url()?>app-assets/js/core/app.js"></script>
+                <script src="<?=base_url()?>app-assets/js/scripts/components.js"></script>
 				<!-- END: Theme JS-->
 
 				<!-- BEGIN: Page JS-->

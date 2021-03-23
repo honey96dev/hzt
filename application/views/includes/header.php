@@ -19,6 +19,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<!-- BEGIN: Vendor CSS-->
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/vendors.min.css">
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/ui/prism.min.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/extensions/toastr.css">
 	<!-- END: Vendor CSS-->
 
 	<!-- BEGIN: Theme CSS-->
@@ -30,8 +32,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/themes/semi-dark-layout.css">
 
 	<!-- BEGIN: Page CSS-->
-	<link rel="stylesheet" type="text/css"
-		href="<?=base_url()?>app-assets/css/core/menu/menu-types/vertical-menu.css">
+	<link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/plugins/forms/validation/form-validation.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/plugins/extensions/toastr.css">
 	<!-- END: Page CSS-->
 
 	<!-- BEGIN: Custom CSS-->
@@ -134,26 +137,26 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="main-menu-content">
 			<ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
 				<li class="nav-item <?= isset($menu) && $menu == "dashboard" ? "active" : "" ?>">
-					<a href="<?=base_url()?>html/ltr/vertical-menu-template/index.html">
+					<a href="<?=site_url()?>">
 						<i class="menu-livicon" data-icon="desktop"></i>
 						<span class="menu-title" data-i18n="">Dashboard</span>
 					</a>
 				</li>
                 <li class="nav-item <?= isset($menu) && $menu == "customers" ? "active" : "" ?>">
-					<a href="<?=base_url()?>html/ltr/vertical-menu-template/index.html">
+					<a href="<?=base_url('customers')?>">
 						<i class="menu-livicon" data-icon="users"></i>
 						<span class="menu-title" data-i18n="">Customers</span>
 						<span class="badge badge-light-primary badge-pill badge-round float-right">2</span>
 					</a>
 				</li>
                 <li class="nav-item <?= isset($menu) && $menu == "bills" ? "active" : "" ?>">
-					<a href="<?=base_url()?>html/ltr/vertical-menu-template/index.html">
+					<a href="<?=base_url('bills')?>">
 						<i class="menu-livicon" data-icon="envelope-put"></i>
 						<span class="menu-title" data-i18n="">Bills</span>
 					</a>
 				</li>
                 <li class="nav-item <?= isset($menu) && $menu == "goals" ? "active" : "" ?>">
-					<a href="<?=base_url()?>html/ltr/vertical-menu-template/index.html">
+					<a href="<?=site_url()?>html/ltr/vertical-menu-template/index.html">
 						<i class="menu-livicon" data-icon="coins"></i>
 						<span class="menu-title" data-i18n="">Goals</span>
 						<span class="badge badge-light-success badge-pill badge-round float-right">2</span>
