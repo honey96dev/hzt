@@ -31,6 +31,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 	<!-- BEGIN: Page CSS-->
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/plugins/forms/validation/form-validation.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/pages/authentication.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/plugins/extensions/toastr.css">
 	<!-- END: Page CSS-->

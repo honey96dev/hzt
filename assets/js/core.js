@@ -3,6 +3,7 @@ $(document).ready(function () {
 	let customer_create_msg = "New customer information saved successfully.";
   let customer_update_msg = "This customer information saved successfully.";
   let bill_create_msg = "New bill information saved successfully.";
+  let bill_update_msg = "This bill information saved successfully.";
 	let error_msg = "Sorry. Something went wrong. Please try again later.";
 
 	$("input[type=checkbox]").on("click", function () {
@@ -120,10 +121,10 @@ $(document).ready(function () {
 	});
 
   /**
-	 * Bill Create Page
+	 * Bill Update Page
 	 */
 
-	$("form#bill-create-form").on("submit", function (e) {
+	$("form#bill-update-form").on("submit", function (e) {
 		e.preventDefault();
 		let form = $(this);
 
@@ -134,7 +135,7 @@ $(document).ready(function () {
 			dataType: "json",
 			success: function (res) {
 				if (res.result == "success") {
-					toastr.success(bill_create_msg, "Success!", { progressBar: true });
+					toastr.success(bill_update_msg, "Success!", { progressBar: true });
 				} else {
 					toastr.warning(error_msg, "Failed...", { progressBar: true });
 				}

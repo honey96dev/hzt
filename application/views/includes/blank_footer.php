@@ -15,6 +15,7 @@
 
     <!-- BEGIN: Page Vendor JS-->
     <script src="<?=base_url()?>app-assets/vendors/js/extensions/toastr.min.js"></script>
+    <script src="<?=base_url()?>app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->

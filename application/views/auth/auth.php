@@ -18,13 +18,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <form id="auth-login-form" action="<?= $login_action_url ?>">
+                                    <form id="auth-login-form" action="<?= $login_action_url ?>" method="POST">
                                         <div class="form-group mb-50">
-                                            <label class="text-bold-600" for="email">Email address</label>
-                                            <input type="email" class="form-control" id="email" name="email" placeholder="Email address"></div>
+                                            <label class="text-bold-600" for="identity">Email address or Username</label>
+                                            <input type="text" class="form-control" id="identity" name="identity" placeholder="Email address or Username" data-validation-required-message="This field is required."></div>
                                         <div class="form-group">
                                             <label class="text-bold-600" for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" data-validation-required-message="This field is required.">
                                         </div>
                                         <div class="form-group d-flex flex-md-row flex-column justify-content-between align-items-center">
                                             <div class="text-left">

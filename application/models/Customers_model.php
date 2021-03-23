@@ -27,7 +27,10 @@ class Customers_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
-
+    /**
+     * @return  Array   Customer information by id
+     * @param   Number  Customer id
+     */
     public function get_customer_by_id($id = 0)
     {
         if ($id == 0) {
@@ -37,7 +40,40 @@ class Customers_model extends CI_Model
         $this->db->from($this->table);
         $this->db->where('id', $id);
         $query = $this->db->get();
-        return $query->row_array();
+        $result = $query->row_array();
+        return empty($result) ? false : $result;
+    }
+    /**
+     * @return  Array   Customer information by email
+     * @param   String  Customer email
+     */
+    public function get_customer_by_email($email = '')
+    {
+        if ($email == '') {
+            return false;
+        }
+
+        $this->db->from($this->table);
+        $this->db->where('email', $email);
+        $query = $this->db->get();
+        $result = $query->row_array();
+        return empty($result) ? false : $result;
+    }
+    /**
+     * @return  Array   Customer information by username
+     * @param   String  Customer username
+     */
+    public function get_customer_by_username($username = '')
+    {
+        if ($username == '') {
+            return false;
+        }
+
+        $this->db->from($this->table);
+        $this->db->where('user_name', $username);
+        $query = $this->db->get();
+        $result = $query->row_array();
+        return empty($result) ? false : $result;
     }
     /**
      * @return {Boolean} true for success, false for otherwise
@@ -93,7 +129,8 @@ class Customers_model extends CI_Model
         return $this->db->update($this->table, $update_data, ['id' => $id]);
     }
 
-    public function delete($id = 0) {
+    public function delete($id = 0)
+    {
         if ($id == 0) {
             return false;
         }
