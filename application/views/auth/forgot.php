@@ -18,29 +18,34 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             </div>
                             <div class="form-group d-flex justify-content-between align-items-center mb-2">
                                 <div class="text-left">
-                                    <div class="ml-3 ml-md-2 mr-1"><a href="<?= $signin_url?>" class="card-link btn btn-primary text-nowrap">Sign
-                                            in</a></div>
+                                    <div class="ml-3 ml-md-2 mr-1">
+                                        <a href="<?= $signin_url?>" class="card-link btn btn-primary text-nowrap">
+                                            Sign in
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="mr-3"><a href="<?= $signup_url?>" class="card-link btn btn-primary text-nowrap">Sign
-                                        up</a></div>
+                                <div class="mr-3">
+                                    <a href="<?= $signup_url?>" class="card-link btn btn-primary text-nowrap">
+                                        Sign up
+                                    </a>
+                                </div>
                             </div>
                             <div class="card-content">
                                 <div class="card-body">
-                                    <div class="text-muted text-center mb-2"><small>Enter the email or phone number you
-                                            used
-                                            when you joined
-                                            and we will send you temporary password</small></div>
+                                    <div class="text-muted text-center mb-2">
+                                        <small>
+                                            Enter the email you used when you joined and we will send you temporary password
+                                        </small>
+                                    </div>
                                     <form class="mb-2" action="index.html">
                                         <div class="form-group mb-2">
-                                            <label class="text-bold-600" for="exampleInputEmailPhone1">Email or
-                                                Phone</label>
-                                            <input type="text" class="form-control" id="exampleInputEmailPhone1" placeholder="Email or Phone"></div>
-                                        <button type="submit" class="btn btn-primary glow position-relative w-100">SEND
-                                            PASSWORD<i id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>
+                                            <label class="text-bold-600" for="exampleInputEmailPhone1">Email</label>
+                                            <input type="text" class="form-control" id="exampleInputEmailPhone1" placeholder="Email">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary glow position-relative w-100">
+                                            SEND PASSWORD<i id="icon-arrow" class="bx bx-right-arrow-alt"></i>
+                                        </button>
                                     </form>
-                                    <div class="text-center mb-2"><a href="auth-login.html"><small class="text-muted">I
-                                                remembered my
-                                                password</small></a></div>
                                 </div>
                             </div>
                         </div>

@@ -35,6 +35,7 @@
 				<script src="<?=base_url()?>app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
 				<script src="<?=base_url()?>app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>
 				<script src="<?=base_url()?>app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
+				<script src="<?=base_url()?>app-assets/vendors/js/charts/apexcharts.min.js"></script>
 				<!-- END: Page Vendor JS-->
 
 				<!-- BEGIN: Theme JS-->

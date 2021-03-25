@@ -20,12 +20,26 @@ class Customers_model extends CI_Model
     {
         $this->db->from($this->table);
         if ($filter != '') {
-            $this->db - where('(' . $filter . ')');
+            $this->db->where('(' . $filter . ')');
         }
 
         $this->db->order_by('updated_at', 'desc');
         $query = $this->db->get();
         return $query->result_array();
+    }
+    /**
+     * @return  Number  number of customers
+     * @param   String  filter string
+     */
+    public function get_customer_count($filter = '')
+    {
+        $this->db->from($this->table);
+        if ($filter != '') {
+            $this->db->where('(' . $filter . ')');
+        }
+
+        $query = $this->db->get();
+        return $query->num_rows();
     }
     /**
      * @return  Array   Customer information by id
@@ -74,6 +88,36 @@ class Customers_model extends CI_Model
         $query = $this->db->get();
         $result = $query->row_array();
         return empty($result) ? false : $result;
+    }
+    /**
+     * @return  Boolean true for add goal success, false for otherwise
+     * @param   Number  Billed amount price
+     *          Number  Customer id
+     */
+    public function add_goal_score($bill_amount = 0, $customer_id = 0)
+    {
+        if ($customer_id == 0) {
+            return false;
+        }
+
+        $customer_info = $this->get_customer_by_id($customer_id);
+        $new_bill_amount = $customer_info['goal_status'] + $bill_amount;
+        return $this->db->update($this->table, ['goal_status' => $new_bill_amount], ['id' => $customer_id]);
+    }
+    /**
+     * @return  Boolean true for success, false for otherwise
+     * @param   Number  Billed amount price
+     *          Number  Customer id
+     */
+    public function sub_goal_score($bill_amount = 0, $customer_id = 0)
+    {
+        if ($customer_id == 0) {
+            return false;
+        }
+
+        $customer_info = $this->get_customer_by_id($customer_id);
+        $new_bill_amount = $customer_info['goal_status'] - $bill_amount;
+        return $this->db->update($this->table, ['goal_status' => $new_bill_amount], ['id' => $customer_id]);
     }
     /**
      * @return {Boolean} true for success, false for otherwise

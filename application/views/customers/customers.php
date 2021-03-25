@@ -22,6 +22,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								<th>Name</th>
 								<th>Email</th>
 								<th>Goal</th>
+								<th>Bill Amount</th>
 								<th>Status</th>
 								<th>Role</th>
 								<th>Registed Date</th>
@@ -39,8 +40,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									<td><?= $customer['first_name'] . ' ' . $customer['surname'] ?></td>
 									<td><?= $customer['email'] ?></td>
 									<td>$<?= $customer['goal'] ?></td>
-									<td class="<?= $customer['status'] ? 'text-success' : 'text-danger'?>">
-										<?= $customer['status'] ? 'Active' : 'Pending'?>
+									<td class="<?= $customer['goal_status'] < $customer['goal'] ? 'text-primary' : 'text-success' ?>">
+										$<?= $customer['goal_status'] ?>
+										<?php if ($customer['goal_status'] >= $customer['goal']):?>
+											<span class="badge badge-light-success">
+												Goal!
+											</span>
+										<?php endif;?>
+									</td>
+									<td>
+										<span class="badge <?= $customer['status'] ? 'badge-light-success' : 'badge-light-warning'?>">
+											<?= $customer['status'] ? 'Active' : 'Pending'?>
+										</span>
 									</td>
 									<td class="text-primary">
 										<?= $customer['role'] ? 'Admin' : ''?>
@@ -65,6 +76,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								<th>Name</th>
 								<th>Email</th>
 								<th>Goal</th>
+								<th>Bill Amount</th>
 								<th>Status</th>
 								<th>Role</th>
 								<th>Registed Date</th>

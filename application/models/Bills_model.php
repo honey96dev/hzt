@@ -22,7 +22,7 @@ class Bills_model extends CI_Model
         $this->db->select("$this->table.*, $this->customer_table.first_name as first_name, $this->customer_table.surname as surname");
         $this->db->from($this->table);
         if ($filter != '') {
-            $this->db - where('(' . $filter . ')');
+            $this->db->where('(' . $filter . ')');
         }
         $this->db->join($this->customer_table, "$this->customer_table.id = $this->table.user_id", "left");
         $this->db->order_by("$this->table.updated_at", 'desc');
@@ -37,7 +37,6 @@ class Bills_model extends CI_Model
         }
 
         $this->db->from($this->table);
-        // $this->db->join($this->customer_table, "$this->customer_table.id = $this->table.user_id", "left");
         $this->db->where("id", $id);
         $query = $this->db->get();
         return $query->row_array();
@@ -66,7 +65,15 @@ class Bills_model extends CI_Model
             'updated_at'    => date('Y-m-d H:i:s'),
         ];
 
-        return $this->db->insert($this->table, $insert_data);
+        if ($this->db->insert($this->table, $insert_data)) {
+            if ($insert_data['status'] == 1) {
+                return $this->customers->add_goal_score($new_data['total_amount'], $new_data['customer']);
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
     }
     /**
      * @return  {Boolean}   true for success, false for otherwise
@@ -92,7 +99,21 @@ class Bills_model extends CI_Model
             'updated_at'    => date('Y-m-d H:i:s'),
         ];
 
-        return $this->db->update($this->table, $update_data, ['id' => $id]);
+        $origin_data = $this->get_bill_by_id($id);
+        if ($this->db->update($this->table, $update_data, ['id' => $id])) {
+            if ($origin_data['status'] == 1 && $update_data['status'] == 0) {
+                return $this->customers->sub_goal_score($origin_data['total_amount'], $update_data['user_id']);
+            } else if ($origin_data['status'] == 1 && $update_data['status'] == 1) {
+                return $this->customers->sub_goal_score($origin_data['total_amount'], $update_data['user_id']) &&
+                        $this->customers->add_goal_score($update_data['total_amount'], $update_data['user_id']);
+            } else if ($origin_data['status'] == 0 && $update_data['status'] == 1) {
+                return $this->customers->add_goal_score($update_data['total_amount'], $update_data['user_id']);
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
     }
 
     public function delete($id = 0) {
@@ -100,6 +121,14 @@ class Bills_model extends CI_Model
             return false;
         }
 
-        return $this->db->delete($this->table, ['id' => $id]);
+        $origin_data = $this->get_bill_by_id($id);
+        if ($this->db->delete($this->table, ['id' => $id])) {
+            if ($origin_data['status'] == 1) {
+                return $this->customers->sub_goal_score($origin_data['total_amount'], $origin_data['user_id']);
+            }
+            return true;
+        } else {
+            return false;
+        }
     }
 }

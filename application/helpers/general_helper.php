@@ -23,4 +23,10 @@ function is_admin() {
     }
     return true;
 }
+
+function get_pendinng_customers() {
+    $CI =& get_instance();
+    $CI->load->model('customers_model', 'customers');
+    return $CI->customers->get_customer_count('status = 0');
+}
 ?>

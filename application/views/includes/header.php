@@ -38,6 +38,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/plugins/forms/validation/form-validation.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/plugins/extensions/toastr.css">
+	<link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/css/pages/dashboard-ecommerce.css">
 	<!-- END: Page CSS-->
 
 	<!-- BEGIN: Custom CSS-->
@@ -159,20 +160,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<a href="<?=base_url('customers')?>">
 						<i class="menu-livicon" data-icon="users"></i>
 						<span class="menu-title" data-i18n="">Customers</span>
-						<span class="badge badge-light-primary badge-pill badge-round float-right">2</span>
+						<span class="badge badge-light-warning badge-pill badge-round float-right"><?= get_pendinng_customers()?></span>
 					</a>
 				</li>
                 <li class="nav-item <?= isset($menu) && $menu == "bills" ? "active" : "" ?>">
 					<a href="<?=base_url('bills')?>">
-						<i class="menu-livicon" data-icon="envelope-put"></i>
-						<span class="menu-title" data-i18n="">Bills</span>
-					</a>
-				</li>
-                <li class="nav-item <?= isset($menu) && $menu == "goals" ? "active" : "" ?>">
-					<a href="<?=site_url('goals')?>">
 						<i class="menu-livicon" data-icon="coins"></i>
-						<span class="menu-title" data-i18n="">Goals</span>
-						<span class="badge badge-light-success badge-pill badge-round float-right">2</span>
+						<span class="menu-title" data-i18n="">Bills</span>
 					</a>
 				</li>
 			</ul>
