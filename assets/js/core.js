@@ -161,7 +161,7 @@ $(document).ready(function () {
   var $secondary_light = '#e7edf3';
   var $light_primary = "#E2ECFF";
 
-	// Order Summary Chart
+	// Bill Summary Chart
 	// --------------------
 	var orderSummaryChartOptions = {
 		chart: {
@@ -182,7 +182,7 @@ $(document).ready(function () {
 		stroke: {
 			curve: "smooth",
 			width: 2.5,
-			dashArray: [0, 8],
+			dashArray: [0, 5],
 		},
 		fill: {
 			type: "gradient",
@@ -198,20 +198,19 @@ $(document).ready(function () {
 		},
 		series: [
 			{
-				name: "Weeks",
-				data: [165, 175, 162, 173, 160, 195, 160, 170, 160, 190, 180],
+				name: "Paid",
+				data: summary_paid,
 				type: "area",
 			},
 			{
-				name: "Months",
-				data: [168, 168, 155, 178, 155, 170, 190, 160, 150, 170, 140],
+				name: "Unpaid",
+				data: summary_unpaid,
 				type: "line",
 			},
 		],
-
 		xaxis: {
 			offsetY: -50,
-			categories: ["", 1, 2, 3, 4, 5, 6, 7, 8, 9, ""],
+			categories: summary_axis,
 			axisBorder: {
 				show: false,
 			},
@@ -225,6 +224,11 @@ $(document).ready(function () {
 				},
 			},
 		},
+    yaxis: {
+      labels: {
+        formatter: (value) => '$ ' + value
+      }
+    },
 		tooltip: {
 			x: { show: false },
 		},
@@ -270,16 +274,16 @@ $(document).ready(function () {
     dataLabels: {
       enabled: false
     },
-    colors: [$info, $secondary_light],
+    colors: [$info, $danger],
     series: [{
-      name: '2019',
-      data: [50, 70, 100, 120, 140, 100, 70, 80, 90, 110, 50, 70, 35, 110, 100, 105, 125, 80]
+      name: 'Paid',
+      data: paid_bill
     }, {
-      name: '2018',
-      data: [70, 50, 20, 30, 20, 90, 90, 60, 50, 0, 50, 60, 140, 50, 20, 20, 10, 0]
+      name: 'Unpaid',
+      data: unpaid_bill
     }],
     xaxis: {
-      categories: ['0', '', '', '', '', "10", '', '', '', '', '', '15', '', '', '', '', '', '20'],
+      categories: bill_axis,
       axisBorder: {
         show: false
       },
@@ -296,6 +300,9 @@ $(document).ready(function () {
     yaxis: {
       show: false,
       floating: true,
+      labels: {
+        formatter: (value) => value
+      }
     },
     tooltip: {
       x: {

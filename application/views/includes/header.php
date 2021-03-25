@@ -50,7 +50,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <!-- BEGIN: Body-->
 
-<body class="vertical-layout vertical-menu-modern 2-columns  navbar-sticky footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+<body class="vertical-layout vertical-menu-modern semi-dark-layout 2-columns  navbar-sticky footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 	<!-- BEGIN: Header-->
 	<div class="header-navbar-shadow"></div>
 	<nav class="header-navbar main-header-navbar navbar-expand-lg navbar navbar-with-menu fixed-top ">
@@ -151,7 +151,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="main-menu-content">
 			<ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
 				<li class="nav-item <?= isset($menu) && $menu == "dashboard" ? "active" : "" ?>">
-					<a href="<?=site_url()?>">
+					<a href="<?=base_url()?>">
 						<i class="menu-livicon" data-icon="desktop"></i>
 						<span class="menu-title" data-i18n="">Dashboard</span>
 					</a>

@@ -10,7 +10,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<!-- Statistics Cards Starts -->
 					<div class="col-12">
 						<div class="row">
-							<div class="col-sm-3 col-12 dashboard-users-success">
+							<div class="col-md-3 col-sm-6 col-12 dashboard-users-primary">
 								<div class="card text-center">
 									<div class="card-content">
 										<div class="card-body py-1">
@@ -18,12 +18,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 												<i class="bx bx-user font-medium-5"></i>
 											</div>
 											<div class="text-muted line-ellipsis">Customers</div>
-											<h3 class="mb-0">45.6k</h3>
+											<h3 class="mb-0"><?= $total_customers?></h3>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-3 col-12 dashboard-users-primary">
+							<div class="col-md-3 col-sm-6 col-12 dashboard-users-primary">
 								<div class="card text-center">
 									<div class="card-content">
 										<div class="card-body py-1">
@@ -31,12 +31,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 												<i class="bx bx-briefcase-alt font-medium-5"></i>
 											</div>
 											<div class="text-muted line-ellipsis">Total Bills</div>
-											<h3 class="mb-0">1.2k</h3>
+											<h3 class="mb-0"><?= $total_bills?></h3>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-3 col-12 dashboard-users-primary">
+							<div class="col-md-3 col-sm-6 col-12 dashboard-users-primary">
 								<div class="card text-center">
 									<div class="card-content">
 										<div class="card-body py-1">
@@ -44,12 +44,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 												<i class="bx bx-dollar font-medium-5"></i>
 											</div>
 											<div class="text-muted line-ellipsis">Billing Amount</div>
-											<h3 class="mb-0">1.2k</h3>
+											<h3 class="mb-0">$<?= show_number($total_paid_amount)?></h3>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-3 col-12 dashboard-users-primary">
+							<div class="col-md-3 col-sm-6 col-12 dashboard-users-primary">
 								<div class="card text-center">
 									<div class="card-content">
 										<div class="card-body py-1">
@@ -57,7 +57,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 												<i class="bx bx-briefcase-alt font-medium-5"></i>
 											</div>
 											<div class="text-muted line-ellipsis">Unpaid Amount</div>
-											<h3 class="mb-0">1.2k</h3>
+											<h3 class="mb-0">$<?= show_number($total_unpaid_amount)?></h3>
 										</div>
 									</div>
 								</div>
@@ -70,84 +70,44 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		</div>
 		<div class="row">
 			<!-- Earning Swiper Starts -->
-			<div class="col-xl-4 col-md-6 col-12">
+			<div class="col-xl-4 col-md-12 col-12">
 				<div class="card">
 					<div class="card-header border-bottom d-flex justify-content-between align-items-center">
 						<h5 class="card-title"><i class="bx bx-dollar font-medium-5 align-middle"></i> <span class="align-middle">Goal Status</span></h5>
 					</div>
 					<div class="main-wrapper-content">
 						<div class="wrapper-content">
-							<div class="widget-earnings-scroll table-responsive">
+							<div class="widget-earnings-scroll table-responsive dashboard-earning-status">
 								<table class="table table-borderless widget-earnings-width mb-0">
 									<tbody>
+										<?php foreach($customer_list as $customer): ?>
+										<?php
+										$percent = $customer['goal_status'] / $customer['goal'] * 100.0;
+										$percent = $percent > 100 ? 100 : $percent;
+										$status_class = $percent >= 75 ? 'success' : ($percent >= 50 ? 'info' : ($percent >= 25 ? 'warning' : 'danger'));
+										?>
 										<tr>
 											<td class="pr-75">
 												<div class="media align-items-center">
 													<div class="media-body">
-														<h6 class="media-heading mb-0">Jerry Lter</h6>
-														<span class="font-small-2">Designer</span>
+														<?php if($percent == 100): ?>
+															<span class="badge badge-light-success badge-pill badge-round float-right" title="Goal reached!">
+																<i class="bx bx-radio-circle-marked font-medium-1"></i>
+															</span>
+														<?php endif;?>
+														<h6 class="media-heading mb-0"><?= $customer['first_name'] . ' ' . $customer['surname'] ?></h6>
 													</div>
 												</div>
 											</td>
-											<td class="px-0 w-50">
-												<div class="progress progress-bar-info progress-sm mb-0">
-													<div class="progress-bar" role="progressbar" aria-valuenow="33" aria-valuemin="80" aria-valuemax="100" style="width:33%;"></div>
+											<td class="px-0 w-25">
+												<div class="progress progress-bar-<?= $status_class?> progress-sm mb-0">
+													<div class="progress-bar" role="progressbar" aria-valuenow="33" aria-valuemin="80" aria-valuemax="100" style="width: <?= $percent?>%;"></div>
 												</div>
 											</td>
-											<td class="text-center"><span class="badge badge-light-warning">- $280</span>
+											<td class="text-center"><span class="badge badge-light-<?= $status_class?>"><?= '$' . $customer['goal'] . ' / $' . $customer['goal_status'] ?></span>
 											</td>
 										</tr>
-										<tr>
-											<td class="pr-75">
-												<div class="media align-items-center">
-													<div class="media-body">
-														<h6 class="media-heading mb-0">Pauly uez</h6>
-														<span class="font-small-2">Devloper</span>
-													</div>
-												</div>
-											</td>
-											<td class="px-0 w-50">
-												<div class="progress progress-bar-success progress-sm mb-0">
-													<div class="progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="80" aria-valuemax="100" style="width:10%;"></div>
-												</div>
-											</td>
-											<td class="text-center"><span class="badge badge-light-success">+ $853</span>
-											</td>
-										</tr>
-										<tr>
-											<td class="pr-75">
-												<div class="media align-items-center">
-													<div class="media-body">
-														<h6 class="media-heading mb-0">Lary Masey</h6>
-														<span class="font-small-2">Marketing</span>
-													</div>
-												</div>
-											</td>
-											<td class="px-0 w-50">
-												<div class="progress progress-bar-primary progress-sm mb-0">
-													<div class="progress-bar" role="progressbar" aria-valuenow="15" aria-valuemin="80" aria-valuemax="100" style="width:15%;"></div>
-												</div>
-											</td>
-											<td class="text-center"><span class="badge badge-light-primary">+ $150</span>
-											</td>
-										</tr>
-										<tr>
-											<td class="pr-75">
-												<div class="media align-items-center">
-													<div class="media-body">
-														<h6 class="media-heading mb-0">Lula Taylor</h6>
-														<span class="font-small-2">Degigner</span>
-													</div>
-												</div>
-											</td>
-											<td class="px-0 w-50">
-												<div class="progress progress-bar-danger progress-sm mb-0">
-													<div class="progress-bar" role="progressbar" aria-valuenow="35" aria-valuemin="80" aria-valuemax="100" style="width:35%;"></div>
-												</div>
-											</td>
-											<td class="text-center"><span class="badge badge-light-danger">- $310</span>
-											</td>
-										</tr>
+										<?php endforeach;?>
 									</tbody>
 								</table>
 							</div>
@@ -162,7 +122,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-md-8 col-12 order-summary border-right pr-md-0">
 							<div class="card mb-0">
 								<div class="card-header d-flex justify-content-between align-items-center">
-									<h4 class="card-title">Billing Summary</h4>
+									<h4 class="card-title">Billing Summary (Last 1 month)</h4>
 								</div>
 								<div class="card-content">
 									<div class="card-body p-0">
@@ -184,7 +144,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 												<p class="mb-0">Total Bills</p>
 											</div>
 											<div class="sales-item-amount">
-												<h6 class="mb-0"><span class="text-success">+</span> 50</h6>
+												<h6 class="mb-0 text-info"> <?= $total_bills?></h6>
 											</div>
 										</div>
 										<div class="d-flex justify-content-between align-items-center mb-2">
@@ -192,7 +152,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 												<p class="mb-0">Paid Bills</p>
 											</div>
 											<div class="sales-item-amount">
-												<h6 class="mb-0"> 59</h6>
+												<h6 class="mb-0 text-success"> <?= $paid_bills?></h6>
 											</div>
 										</div>
 										<div class="d-flex justify-content-between align-items-center">
@@ -200,13 +160,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 												<p class="mb-0">Unpaid Bills</p>
 											</div>
 											<div class="sales-item-amount">
-												<h6 class="mb-0"><span class="text-danger">-</span> 12</h6>
+												<h6 class="mb-0 text-danger"> <?= $unpaid_bills?></h6>
 											</div>
 										</div>
 									</div>
 									<div class="card-footer border-top pb-0">
 										<h5>Total Billing Amount</h5>
-										<span class="text-primary text-bold-500">$82,950.96</span>
+										<span class="text-primary text-bold-500">$<?= show_number($total_amount)?></span>
 										<div id="revenue-growth-chart"></div>
 									</div>
 								</div>
@@ -219,3 +179,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	</section>
 	<!--/ Description -->
 </div>
+
+<script>
+	let summary_axis = [<?= implode(',', $billing_summary_axis) ?>];
+	let summary_paid = [<?= implode(',', $billing_summary_paid) ?>];
+	let summary_unpaid = [<?= implode(',', $billing_summary_unpaid) ?>];
+	let bill_axis = [<?= implode(',', $bill_axis)?>];
+	let paid_bill = [<?= implode(',', $paid_bill)?>];
+	let unpaid_bill = [<?= implode(',', $unpaid_bill)?>];
+	console.log(paid_bill);
+</script>

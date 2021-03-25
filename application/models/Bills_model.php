@@ -29,6 +29,35 @@ class Bills_model extends CI_Model
         $query = $this->db->get();
         return $query->result_array();
     }
+    /**
+     * @return Number of result
+     * @param {String} filter
+     */
+    public function get_bill_count($filter = '')
+    {
+        $this->db->from($this->table);
+        if ($filter != '') {
+            $this->db->where('(' . $filter . ')');
+        }
+        $query = $this->db->get();
+        return $query->num_rows();
+    }
+
+    public function get_total_billing_amount_by_status($status = -1, $bill_date = '')
+    {
+        $this->db->select('SUM(total_amount) as total');
+        $this->db->from($this->table);
+        if ($status != -1) {
+            $this->db->where('status', $status);
+        }
+
+        if ($bill_date != '') {
+            $this->db->where('bill_date', $bill_date);
+        }
+        $query = $this->db->get();
+        $result = $query->row_array();
+        return (!empty($result) && $result['total'] != '') ? $result['total'] : 0;
+    }
 
     public function get_bill_by_id($id = 0)
     {
@@ -52,17 +81,17 @@ class Bills_model extends CI_Model
         }
 
         $insert_data = [
-            'bill_number'   => $new_data['bill_number'],
-            'tax_id'        => $new_data['tax_id'],
-            'user_id'       => $new_data['customer'],
-            'company_name'  => $new_data['company_name'],
-            'product_name'  => $new_data['product_name'],
-            'quantity'      => $new_data['quantity'],
-            'total_amount'  => $new_data['total_amount'],
-            'bill_date'     => date('Y-m-d', (int)strtotime($new_data['bill_date'])),
-            'status'        => (isset($new_data['status']) && $new_data['status'] == "on") ? 1 : 0,
-            'created_at'    => date('Y-m-d H:i:s'),
-            'updated_at'    => date('Y-m-d H:i:s'),
+            'bill_number' => $new_data['bill_number'],
+            'tax_id' => $new_data['tax_id'],
+            'user_id' => $new_data['customer'],
+            'company_name' => $new_data['company_name'],
+            'product_name' => $new_data['product_name'],
+            'quantity' => $new_data['quantity'],
+            'total_amount' => $new_data['total_amount'],
+            'bill_date' => date('Y-m-d', (int) strtotime($new_data['bill_date'])),
+            'status' => (isset($new_data['status']) && $new_data['status'] == "on") ? 1 : 0,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
         ];
 
         if ($this->db->insert($this->table, $insert_data)) {
@@ -87,16 +116,16 @@ class Bills_model extends CI_Model
         }
 
         $update_data = [
-            'bill_number'   => $new_data['bill_number'],
-            'tax_id'        => $new_data['tax_id'],
-            'user_id'       => $new_data['customer'],
-            'company_name'  => $new_data['company_name'],
-            'product_name'  => $new_data['product_name'],
-            'quantity'      => $new_data['quantity'],
-            'total_amount'  => $new_data['total_amount'],
-            'bill_date'     => date('Y-m-d', (int)strtotime($new_data['bill_date'])),
-            'status'        => (isset($new_data['status']) && $new_data['status'] == "on") ? 1 : 0,
-            'updated_at'    => date('Y-m-d H:i:s'),
+            'bill_number' => $new_data['bill_number'],
+            'tax_id' => $new_data['tax_id'],
+            'user_id' => $new_data['customer'],
+            'company_name' => $new_data['company_name'],
+            'product_name' => $new_data['product_name'],
+            'quantity' => $new_data['quantity'],
+            'total_amount' => $new_data['total_amount'],
+            'bill_date' => date('Y-m-d', (int) strtotime($new_data['bill_date'])),
+            'status' => (isset($new_data['status']) && $new_data['status'] == "on") ? 1 : 0,
+            'updated_at' => date('Y-m-d H:i:s'),
         ];
 
         $origin_data = $this->get_bill_by_id($id);
@@ -105,7 +134,7 @@ class Bills_model extends CI_Model
                 return $this->customers->sub_goal_score($origin_data['total_amount'], $update_data['user_id']);
             } else if ($origin_data['status'] == 1 && $update_data['status'] == 1) {
                 return $this->customers->sub_goal_score($origin_data['total_amount'], $update_data['user_id']) &&
-                        $this->customers->add_goal_score($update_data['total_amount'], $update_data['user_id']);
+                $this->customers->add_goal_score($update_data['total_amount'], $update_data['user_id']);
             } else if ($origin_data['status'] == 0 && $update_data['status'] == 1) {
                 return $this->customers->add_goal_score($update_data['total_amount'], $update_data['user_id']);
             } else {
@@ -116,7 +145,8 @@ class Bills_model extends CI_Model
         }
     }
 
-    public function delete($id = 0) {
+    public function delete($id = 0)
+    {
         if ($id == 0) {
             return false;
         }

@@ -16,5 +16,28 @@ a.btn {
 
 .manage-buttons {
 	float: right;
-    margin-top: -15px;
+	margin-top: -15px;
+}
+
+.dashboard-earning-status {
+	height: 300px;
+}
+
+.dashboard-earning-status::-webkit-scrollbar {
+	width: 11px;
+}
+
+.dashboard-earning-status {
+	scrollbar-width: thin;
+	scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+
+.dashboard-earning-status::-webkit-scrollbar-track {
+	background: var(--scrollbarBG);
+}
+
+.dashboard-earning-status::-webkit-scrollbar-thumb {
+	background-color: var(--thumbBG);
+	border-radius: 6px;
+	border: 3px solid var(--scrollbarBG);
 }

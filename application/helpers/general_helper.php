@@ -29,4 +29,8 @@ function get_pendinng_customers() {
     $CI->load->model('customers_model', 'customers');
     return $CI->customers->get_customer_count('status = 0');
 }
+
+function show_number($number) {
+    return number_format($number, 2, '.', ',');
+}
 ?>

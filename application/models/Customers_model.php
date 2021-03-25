@@ -16,14 +16,14 @@ class Customers_model extends CI_Model
      * @return Array of result
      * @param {String} filter
      */
-    public function get_customer_list($filter = '')
+    public function get_customer_list($filter = '', $order = 'updated_at', $order_by = 'desc')
     {
         $this->db->from($this->table);
         if ($filter != '') {
             $this->db->where('(' . $filter . ')');
         }
 
-        $this->db->order_by('updated_at', 'desc');
+        $this->db->order_by($order, $order_by);
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -102,7 +102,7 @@ class Customers_model extends CI_Model
 
         $customer_info = $this->get_customer_by_id($customer_id);
         $new_bill_amount = $customer_info['goal_status'] + $bill_amount;
-        return $this->db->update($this->table, ['goal_status' => $new_bill_amount], ['id' => $customer_id]);
+        return $this->db->update($this->table, ['goal_status' => $new_bill_amount, 'updated_at' => date('Y-m-d H:i:s')], ['id' => $customer_id]);
     }
     /**
      * @return  Boolean true for success, false for otherwise
@@ -117,7 +117,7 @@ class Customers_model extends CI_Model
 
         $customer_info = $this->get_customer_by_id($customer_id);
         $new_bill_amount = $customer_info['goal_status'] - $bill_amount;
-        return $this->db->update($this->table, ['goal_status' => $new_bill_amount], ['id' => $customer_id]);
+        return $this->db->update($this->table, ['goal_status' => $new_bill_amount, 'updated_at' => date('Y-m-d H:i:s')], ['id' => $customer_id]);
     }
     /**
      * @return {Boolean} true for success, false for otherwise
