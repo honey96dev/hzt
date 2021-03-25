@@ -43,7 +43,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 											<div class="badge-circle badge-circle-lg badge-circle-light-warning mx-auto mb-50">
 												<i class="bx bx-dollar font-medium-5"></i>
 											</div>
-											<div class="text-muted line-ellipsis">Billing Amount</div>
+											<div class="text-muted line-ellipsis">Paid Amount</div>
 											<h3 class="mb-0">$<?= show_number($total_paid_amount)?></h3>
 										</div>
 									</div>
