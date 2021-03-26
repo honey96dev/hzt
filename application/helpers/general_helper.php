@@ -33,4 +33,12 @@ function get_pendinng_customers() {
 function show_number($number) {
     return number_format($number, 2, '.', ',');
 }
+
+function current_customer_id() {
+    $CI =& get_instance();
+    if (!$CI->session->has_userdata('user')) {
+        return 0;
+    }
+    return $CI->session->user['id'];
+}
 ?>

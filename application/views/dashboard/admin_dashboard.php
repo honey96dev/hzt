@@ -187,5 +187,4 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	let bill_axis = [<?= implode(',', $bill_axis)?>];
 	let paid_bill = [<?= implode(',', $paid_bill)?>];
 	let unpaid_bill = [<?= implode(',', $unpaid_bill)?>];
-	console.log(paid_bill);
 </script>

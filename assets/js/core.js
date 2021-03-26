@@ -154,167 +154,352 @@ $(document).ready(function () {
 	 * Admin Dashboard Page
 	 */
 	var $primary = "#00CFDD";
-  var $danger = '#FF5B5C';
-  var $warning = '#FDAC41';
-  var $info = '#00CFDD';
-  var $secondary = '#828D99';
-  var $secondary_light = '#e7edf3';
-  var $light_primary = "#E2ECFF";
+	var $danger = "#FF5B5C";
+	var $warning = "#FDAC41";
+	var $info = "#00CFDD";
+	var $secondary = "#828D99";
+	var $primary_light = '#E2ECFF';
+  var $gray_light = '#828D99';
+	var $light_primary = "#E2ECFF";
 
 	// Bill Summary Chart
 	// --------------------
-	var orderSummaryChartOptions = {
-		chart: {
-			height: 270,
-			type: "line",
-			stacked: false,
-			toolbar: {
-				show: false,
-			},
-			sparkline: {
-				enabled: true,
-			},
-		},
-		colors: [$primary, $primary],
-		dataLabels: {
-			enabled: false,
-		},
-		stroke: {
-			curve: "smooth",
-			width: 2.5,
-			dashArray: [0, 5],
-		},
-		fill: {
-			type: "gradient",
-			gradient: {
-				inverseColors: false,
-				shade: "light",
-				type: "vertical",
-				gradientToColors: [$light_primary, $primary],
-				opacityFrom: 0.7,
-				opacityTo: 0.55,
-				stops: [0, 80, 100],
-			},
-		},
-		series: [
-			{
-				name: "Paid",
-				data: summary_paid,
-				type: "area",
-			},
-			{
-				name: "Unpaid",
-				data: summary_unpaid,
+	if ($("#order-summary-chart").length) {
+		var orderSummaryChartOptions = {
+			chart: {
+				height: 270,
 				type: "line",
-			},
-		],
-		xaxis: {
-			offsetY: -50,
-			categories: summary_axis,
-			axisBorder: {
-				show: false,
-			},
-			axisTicks: {
-				show: false,
-			},
-			labels: {
-				show: true,
-				style: {
-					colors: $secondary,
+				stacked: false,
+				toolbar: {
+					show: false,
+				},
+				sparkline: {
+					enabled: true,
 				},
 			},
-		},
-    yaxis: {
-      labels: {
-        formatter: (value) => '$ ' + value
-      }
-    },
-		tooltip: {
-			x: { show: false },
-		},
-	};
+			colors: [$primary, $primary],
+			dataLabels: {
+				enabled: false,
+			},
+			stroke: {
+				curve: "smooth",
+				width: 2.5,
+				dashArray: [0, 5],
+			},
+			fill: {
+				type: "gradient",
+				gradient: {
+					inverseColors: false,
+					shade: "light",
+					type: "vertical",
+					gradientToColors: [$light_primary, $primary],
+					opacityFrom: 0.7,
+					opacityTo: 0.55,
+					stops: [0, 80, 100],
+				},
+			},
+			series: [
+				{
+					name: "Paid",
+					data: summary_paid,
+					type: "area",
+				},
+				{
+					name: "Unpaid",
+					data: summary_unpaid,
+					type: "line",
+				},
+			],
+			xaxis: {
+				offsetY: -50,
+				categories: summary_axis,
+				axisBorder: {
+					show: false,
+				},
+				axisTicks: {
+					show: false,
+				},
+				labels: {
+					show: true,
+					style: {
+						colors: $secondary,
+					},
+				},
+			},
+			yaxis: {
+				labels: {
+					formatter: (value) => "$ " + value,
+				},
+			},
+			tooltip: {
+				x: { show: false },
+			},
+		};
 
-	var orderSummaryChart = new ApexCharts(
-		document.querySelector("#order-summary-chart"),
-		orderSummaryChartOptions
-	);
+		var orderSummaryChart = new ApexCharts(
+			document.querySelector("#order-summary-chart"),
+			orderSummaryChartOptions
+		);
 
-	orderSummaryChart.render();
+		orderSummaryChart.render();
+	}
 
-  // Revenue Growth Chart
-  // ---------------------
-  var revenueChartOptions = {
-    chart: {
-      height: 100,
-      type: 'bar',
-      stacked: true,
-      toolbar: {
-        show: false
-      }
-    },
-    grid: {
-      show: false,
-      padding: {
-        left: 0,
-        right: 0,
-        top: -20,
-        bottom: -15
-      }
-    },
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: '20%',
-        endingShape: 'rounded'
-      },
-    },
-    legend: {
-      show: false
-    },
-    dataLabels: {
-      enabled: false
-    },
-    colors: [$info, $danger],
-    series: [{
-      name: 'Paid',
-      data: paid_bill
-    }, {
-      name: 'Unpaid',
-      data: unpaid_bill
-    }],
-    xaxis: {
-      categories: bill_axis,
-      axisBorder: {
-        show: false
-      },
-      axisTicks: {
-        show: false
-      },
-      labels: {
-        style: {
-          colors: $secondary
-        },
-        offsetY: -5
-      }
-    },
-    yaxis: {
-      show: false,
-      floating: true,
-      labels: {
-        formatter: (value) => value
-      }
-    },
-    tooltip: {
-      x: {
-        show: false,
-      },
-    }
-  }
+	// Revenue Growth Chart
+	// ---------------------
+	if ($("#revenue-growth-chart").length) {
+		var revenueChartOptions = {
+			chart: {
+				height: 100,
+				type: "bar",
+				stacked: true,
+				toolbar: {
+					show: false,
+				},
+			},
+			grid: {
+				show: false,
+				padding: {
+					left: 0,
+					right: 0,
+					top: -20,
+					bottom: -15,
+				},
+			},
+			plotOptions: {
+				bar: {
+					horizontal: false,
+					columnWidth: "20%",
+					endingShape: "rounded",
+				},
+			},
+			legend: {
+				show: false,
+			},
+			dataLabels: {
+				enabled: false,
+			},
+			colors: [$info, $danger],
+			series: [
+				{
+					name: "Paid",
+					data: paid_bill,
+				},
+				{
+					name: "Unpaid",
+					data: unpaid_bill,
+				},
+			],
+			xaxis: {
+				categories: bill_axis,
+				axisBorder: {
+					show: false,
+				},
+				axisTicks: {
+					show: false,
+				},
+				labels: {
+					style: {
+						colors: $secondary,
+					},
+					offsetY: -5,
+				},
+			},
+			yaxis: {
+				show: false,
+				floating: true,
+				labels: {
+					formatter: (value) => value,
+				},
+			},
+			tooltip: {
+				x: {
+					show: false,
+				},
+			},
+		};
 
-  var revenueChart = new ApexCharts(
-    document.querySelector("#revenue-growth-chart"),
-    revenueChartOptions
-  );
+		var revenueChart = new ApexCharts(
+			document.querySelector("#revenue-growth-chart"),
+			revenueChartOptions
+		);
 
-  revenueChart.render();
+		revenueChart.render();
+	}
+
+	// Growth Radial Chart
+	// --------------------
+	if ($("#goal-status-chart").length) {
+		var growthChartOptions = {
+			chart: {
+				height: 200,
+				type: "radialBar",
+				sparkline: {
+					show: true,
+				},
+			},
+			grid: {
+				show: false,
+			},
+			plotOptions: {
+				radialBar: {
+					size: 100,
+					startAngle: -135,
+					endAngle: 135,
+					offsetY: 40,
+					hollow: {
+						size: "60%",
+					},
+					track: {
+						strokeWidth: "90%",
+						background: "#fff",
+					},
+					dataLabels: {
+						value: {
+							offsetY: -10,
+							color: "#475f7b",
+							fontSize: "26px",
+						},
+						name: {
+							fontSize: "15px",
+							color: "#596778",
+							offsetY: 30,
+						},
+					},
+				},
+			},
+			colors: ["#fff"],
+			fill: {
+				type: "gradient",
+				gradient: {
+					shade: "dark",
+					type: "horizontal",
+					shadeIntensity: 0.5,
+					gradientToColors: [$primary],
+					inverseColors: true,
+					opacityFrom: 1,
+					opacityTo: 1,
+					stops: [0, 100],
+				},
+			},
+			stroke: {
+				dashArray: 3,
+			},
+			series: [goal_status_percent],
+			labels: ["Status"],
+		};
+
+		var growthChart = new ApexCharts(
+			document.querySelector("#goal-status-chart"),
+			growthChartOptions
+		);
+
+		growthChart.render();
+	}
+
+	if ($("#analytics-bar-chart").length) {
+		// Bar Chart
+		// ---------
+		var analyticsBarChartOptions = {
+			chart: {
+				height: 260,
+        width: '100%',
+				type: "bar",
+				toolbar: {
+					show: false,
+				},
+			},
+			plotOptions: {
+				bar: {
+					horizontal: false,
+					columnWidth: "30%",
+					endingShape: "rounded",
+				},
+			},
+			legend: {
+				horizontalAlign: "right",
+				offsetY: -10,
+				markers: {
+					radius: 50,
+					height: 8,
+					width: 8,
+				},
+			},
+			dataLabels: {
+				enabled: false,
+			},
+			colors: [$primary, $primary_light],
+			fill: {
+				type: "gradient",
+				gradient: {
+					shade: "light",
+					type: "vertical",
+					inverseColors: true,
+					opacityFrom: 1,
+					opacityTo: 1,
+					stops: [0, 70, 100],
+				},
+			},
+			series: [
+				{
+					name: "2019",
+					data: [80, 95, 150, 210, 140, 230, 300, 280, 130],
+				},
+				{
+					name: "2018",
+					data: [50, 70, 130, 180, 90, 180, 270, 220, 110],
+				},
+			],
+			xaxis: {
+				categories: [
+					"Jan",
+					"Feb",
+					"Mar",
+					"Apr",
+					"May",
+					"Jun",
+					"Jul",
+					"Aug",
+					"Sep",
+				],
+				axisBorder: {
+					show: false,
+				},
+				axisTicks: {
+					show: false,
+				},
+				labels: {
+					style: {
+						colors: $gray_light,
+					},
+				},
+			},
+			yaxis: {
+				min: 0,
+				max: 300,
+				tickAmount: 3,
+				labels: {
+					style: {
+						color: $gray_light,
+					},
+				},
+			},
+			legend: {
+				show: false,
+			},
+			tooltip: {
+				y: {
+					formatter: function (val) {
+						return "$ " + val + " thousands";
+					},
+				},
+			},
+		};
+
+		var analyticsBarChart = new ApexCharts(
+			document.querySelector("#analytics-bar-chart"),
+			analyticsBarChartOptions
+		);
+
+		analyticsBarChart.render();
+	}
 });

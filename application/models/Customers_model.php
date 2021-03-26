@@ -89,6 +89,15 @@ class Customers_model extends CI_Model
         $result = $query->row_array();
         return empty($result) ? false : $result;
     }
+
+    public function get_customer_goal($customer_id = 0) {
+        if ($customer_id == 0) {
+            return 0;
+        }
+
+        $customer_info = $this->get_customer_by_id($customer_id);
+        return $customer_info['goal'];
+    }
     /**
      * @return  Boolean true for add goal success, false for otherwise
      * @param   Number  Billed amount price

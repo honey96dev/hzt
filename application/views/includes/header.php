@@ -151,20 +151,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="main-menu-content">
 			<ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="lines">
 				<li class="nav-item <?= isset($menu) && $menu == "dashboard" ? "active" : "" ?>">
-					<a href="<?=base_url()?>">
+					<a href="<?= is_admin() ? base_url() : base_url('dashboard/customer') ?>">
 						<i class="menu-livicon" data-icon="desktop"></i>
 						<span class="menu-title" data-i18n="">Dashboard</span>
 					</a>
 				</li>
-                <li class="nav-item <?= isset($menu) && $menu == "customers" ? "active" : "" ?>">
-					<a href="<?=base_url('customers')?>">
-						<i class="menu-livicon" data-icon="users"></i>
-						<span class="menu-title" data-i18n="">Customers</span>
-						<span class="badge badge-light-warning badge-pill badge-round float-right"><?= get_pendinng_customers()?></span>
-					</a>
-				</li>
+				<?php if(is_admin()): ?>
+					<li class="nav-item <?= isset($menu) && $menu == "customers" ? "active" : "" ?>">
+						<a href="<?=base_url('customers')?>">
+							<i class="menu-livicon" data-icon="users"></i>
+							<span class="menu-title" data-i18n="">Customers</span>
+							<span class="badge badge-light-warning badge-pill badge-round float-right"><?= get_pendinng_customers()?></span>
+						</a>
+					</li>
+				<?php endif;?>
                 <li class="nav-item <?= isset($menu) && $menu == "bills" ? "active" : "" ?>">
-					<a href="<?=base_url('bills')?>">
+					<a href="<?= is_admin() ? base_url('bills') : base_url('customers/detail')?>">
 						<i class="menu-livicon" data-icon="coins"></i>
 						<span class="menu-title" data-i18n="">Bills</span>
 					</a>

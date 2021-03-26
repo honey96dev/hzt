@@ -20,7 +20,7 @@ $(document).ready(function() {
 			dataType: "json",
 			success: function (res) {
 				if (res.result == "success") {
-					window.location.href = base_url;
+					window.location.href = res.return_url;
 				} else {
 					toastr.warning(res.msg, "Failed...", { progressBar: true });
           $("#auth-login-form input").val("");

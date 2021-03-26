@@ -28,6 +28,7 @@ class Auth extends CI_Controller
         if ($this->input->post()) {
             $login_data = $this->input->post();
             $result = $this->auth->verify_user($login_data);
+            $result['return_url'] = is_admin() ? base_url() : base_url('dashboard/customer');
             echo json_encode($result);
         } else {
             echo json_encode(['result' => 'error']);

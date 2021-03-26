@@ -43,7 +43,7 @@ class Bills_model extends CI_Model
         return $query->num_rows();
     }
 
-    public function get_total_billing_amount_by_status($status = -1, $bill_date = '')
+    public function get_total_billing_amount_by_status($status = -1, $bill_date = '', $customer_id = 0)
     {
         $this->db->select('SUM(total_amount) as total');
         $this->db->from($this->table);
@@ -53,6 +53,10 @@ class Bills_model extends CI_Model
 
         if ($bill_date != '') {
             $this->db->where('bill_date', $bill_date);
+        }
+
+        if ($customer_id != 0) {
+            $this->db->where('user_id', $customer_id);
         }
         $query = $this->db->get();
         $result = $query->row_array();
