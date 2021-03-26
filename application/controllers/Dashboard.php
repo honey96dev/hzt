@@ -99,9 +99,35 @@ class Dashboard extends CI_Controller
             'total_bills' => $this->bills->get_bill_count('user_id = ' . $customer_id),
             'total_paid_amount' => $this->bills->get_total_billing_amount_by_status(1, '', $customer_id),
             'total_unpaid_amount' => $this->bills->get_total_billing_amount_by_status(0, '', $customer_id),
-			'goal_status_percent' => $percent
+			'goal_status_percent' => $percent,
+			'bill_list' => $this->bills->get_bill_list('user_id = ' . $customer_id, 3, 0, 'bill_date', 'desc')
         ];
 
+		$bill_history_axis = [];
+        for ($i = 14; $i >= 0; $i--) {
+            if ($i % 2 == 1) {
+                $time = '"' . date('M j', mktime(0, 0, 0, date('m'), date('d') - $i, date('Y'))) . '"';
+            } else {
+                $time = '""';
+            }
+            $bill_history_axis[] = $time;
+        }
+
+        $data['bill_history_axis'] = $bill_history_axis;
+
+		$billing_paid_value = [];
+        $billing_unpaid_value = [];
+        for ($i = 14; $i >= 0; $i--) {
+            $time = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') - $i, date('Y')));
+            $paid_amount = $this->bills->get_total_billing_amount_by_status(1, $time, $customer_id);
+            $billing_paid_value[] = $paid_amount;
+            $unpaid_amount = $this->bills->get_total_billing_amount_by_status(0, $time, $customer_id);
+            $billing_unpaid_value[] = $unpaid_amount;
+        }
+
+        $data['billing_history_paid'] = $billing_paid_value;
+        $data['billing_history_unpaid'] = $billing_unpaid_value;
+		
 		$this->load->view('includes/header', $header_data);
         $this->load->view('dashboard/customer_dashboard', $data);
         $this->load->view('includes/footer');

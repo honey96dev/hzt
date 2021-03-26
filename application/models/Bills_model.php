@@ -17,7 +17,7 @@ class Bills_model extends CI_Model
      * @return Array of result
      * @param {String} filter
      */
-    public function get_bill_list($filter = '')
+    public function get_bill_list($filter = '', $limit = 0, $offset = 0, $order = '', $dir = 'asc')
     {
         $this->db->select("$this->table.*, $this->customer_table.first_name as first_name, $this->customer_table.surname as surname");
         $this->db->from($this->table);
@@ -25,7 +25,14 @@ class Bills_model extends CI_Model
             $this->db->where('(' . $filter . ')');
         }
         $this->db->join($this->customer_table, "$this->customer_table.id = $this->table.user_id", "left");
-        $this->db->order_by("$this->table.updated_at", 'desc');
+        if ($order != '') {
+            $this->db->order_by($order, $dir);
+        } else {
+            $this->db->order_by("$this->table.updated_at", 'desc');
+        }
+        if ($limit != 0) {
+            $this->db->limit($limit, $offset);
+        }
         $query = $this->db->get();
         return $query->result_array();
     }

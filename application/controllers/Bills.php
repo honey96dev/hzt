@@ -24,6 +24,9 @@ class Bills extends CI_Controller
             'delete_url'    => base_url('bills/delete'),
         ];
 
+        $customer_id = current_customer_id();
+        $data['bills'] = is_admin() ? $this->bills->get_bill_list() : $this->bills->get_bill_list('user_id = ' . $customer_id);
+
         $this->load->view('includes/header', $header_data);
         $this->load->view('bills/bills', $data);
         $this->load->view('includes/footer');

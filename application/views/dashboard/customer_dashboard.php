@@ -68,7 +68,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			</div>
 		</div>
         <div class="row">
-            <div class="col-xl-3 col-md-12 col-12 growth-card">
+            <div class="col-xl-3 col-lg-6 col-12 growth-card">
                 <div class="card">
                     <div class="card-body text-center goal-status-card">
                         <div id="goal-status-chart"></div>
@@ -76,11 +76,44 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     </div>
                 </div>
             </div>
-            <div class="col-xl-6 col-md-12 col-12 growth-card">
+            <div class="col-xl-3 col-lg-6 col-12">
+                <div class="card ">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            Bills Timeline
+                        </h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <ul class="widget-timeline mb-0">
+                                <?php foreach($bill_list as $bill):?>
+                                    <li class="timeline-items timeline-icon-primary active">
+                                        <div class="timeline-time"><?= date('F, j', strtotime($bill['bill_date']))?></div>
+                                        <h6 class="timeline-title"><?= $bill['product_name']?>, <span class="text-info">$<?= $bill['total_amount']?></span></h6>
+                                        <?php if ($bill['status']): ?>
+                                        <p class="timeline-text">
+                                            <span class="badge badge-light-success">
+												Paid
+											</span>
+                                        </p>
+                                        <?php else: ?>
+                                        <p class="timeline-text">
+                                            <span class="badge badge-light-danger">
+												Unpaid
+											</span>
+                                        </p>
+                                        <?php endif;?>
+                                    </li>
+                                <?php endforeach;?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-12 col-12 growth-card">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="card-title">Billing History in last 15 days</h4>
-                        <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
                     </div>
                     <div class="card-content">
                         <div class="card-body pb-1">
@@ -88,7 +121,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -96,4 +128,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <script>
     let goal_status_percent = <?= $goal_status_percent?>;
+    let bill_history_axis = [<?= implode(',', $bill_history_axis)?>];
+    let history_paid = [<?= implode(',', $billing_history_paid) ?>];
+	let history_unpaid = [<?= implode(',', $billing_history_unpaid) ?>];
 </script>

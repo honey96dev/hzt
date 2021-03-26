@@ -44,7 +44,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 										$<?= $customer['goal_status'] ?>
 										<?php if ($customer['goal_status'] >= $customer['goal']):?>
 											<span class="badge badge-light-success">
-												Goal!
+												Goal
 											</span>
 										<?php endif;?>
 									</td>
