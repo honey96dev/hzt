@@ -62,6 +62,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 											<span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">
 											</span>
 											<div class="dropdown-menu dropdown-menu-right">
+												<?php if($customer['goal_status'] >= $customer['goal']): ?>
+													<a class="dropdown-item" href="<?= $confirm_url . '/' . $customer['id'] ?>"><i class="bx bx-rocket mr-1"></i> confirm</a>
+												<?php endif;?>
 												<a class="dropdown-item" href="<?= $update_url . '/' . $customer['id'] ?>"><i class="bx bx-edit-alt mr-1"></i> edit</a>
 												<a class="dropdown-item delete-cusomer-btn" href="<?= $delete_url . '/' . $customer['id'] ?>"><i class="bx bx-trash mr-1"></i> delete</a>
 											</div>

@@ -20,7 +20,8 @@ class Customers extends CI_Controller
             'customers' => $this->customers->get_customer_list(),
             'create_url' => base_url('customers/create'),
             'update_url' => base_url('customers/update'),
-            'delete_url' => base_url('customers/delete'),
+            'delete_url' => base_url('/delete'),
+            'confirm_url' => base_url('customers/confirm'),
         ];
 
         $this->load->view('includes/header', $header_data);
@@ -69,7 +70,7 @@ class Customers extends CI_Controller
         ];
 
         $data = [
-            'customer' => $this->customers->get_customer_by_id($id)
+            'customer' => $this->customers->get_customer_by_id($id),
         ];
 
         $this->load->view('includes/header', $header_data);
@@ -77,7 +78,8 @@ class Customers extends CI_Controller
         $this->load->view('includes/footer');
     }
 
-    public function update_action($id = 0) {
+    public function update_action($id = 0)
+    {
         if ($id != 0 && $this->input->post()) {
             $new_data = $this->input->post();
             if ($this->customers->update($id, $new_data)) {
@@ -91,8 +93,18 @@ class Customers extends CI_Controller
         return;
     }
 
-    public function delete($id = 0) {
+    public function delete($id = 0)
+    {
         $this->customers->delete($id);
+        redirect(base_url('customers'));
+    }
+
+    public function confirm($id = 0)
+    {
+        if ($id == 0) {
+            redirect(base_url('customers'));
+        }
+        $this->customers->confirm_status($id);
         redirect(base_url('customers'));
     }
 }

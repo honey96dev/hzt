@@ -11,6 +11,7 @@ class Bills_model extends CI_Model
         parent::__construct();
         $this->table = 'bills';
         $this->customer_table = 'users';
+        $this->load->model('notifications_model', 'notifications');
     }
 
     /**
@@ -81,6 +82,10 @@ class Bills_model extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+
+    public function confirm_bill_status($customer_id = 0) {
+        $this->db->update($this->table, ['status' => 2], ['user_id' => $customer_id, 'status' => 1]);
+    }
     /**
      * @return {Boolean} true for success, false for otherwise
      * @param {Array} new bill data
@@ -107,10 +112,15 @@ class Bills_model extends CI_Model
 
         if ($this->db->insert($this->table, $insert_data)) {
             if ($insert_data['status'] == 1) {
-                return $this->customers->add_goal_score($new_data['total_amount'], $new_data['customer']);
-            } else {
-                return true;
+                $origin_customer_info = $this->customers->get_customer_by_id($insert_data['user_id']);
+                $goal = $origin_customer_info['goal'];
+                $goal_status = $origin_customer_info['goal_status'];
+                $this->customers->add_goal_score($new_data['total_amount'], $new_data['customer']);
+                if ($goal_status < $goal && ($goal_status + $insert_data['total_amount'] > $goal)) {
+                    $this->notifications->create_check_notify($insert_data['user_id']);
+                }
             }
+            return true;
         } else {
             return false;
         }
@@ -146,7 +156,7 @@ class Bills_model extends CI_Model
             } else if ($origin_data['status'] == 1 && $update_data['status'] == 1) {
                 return $this->customers->sub_goal_score($origin_data['total_amount'], $update_data['user_id']) &&
                 $this->customers->add_goal_score($update_data['total_amount'], $update_data['user_id']);
-            } else if ($origin_data['status'] == 0 && $update_data['status'] == 1) {
+            } else if ($origin_data['status'] != 1 && $update_data['status'] == 1) {
                 return $this->customers->add_goal_score($update_data['total_amount'], $update_data['user_id']);
             } else {
                 return true;

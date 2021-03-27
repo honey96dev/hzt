@@ -57,8 +57,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									<td><?= $bill['product_name'] ?></td>
 									<td><?= $bill['quantity'] . ' kg' ?></td>
 									<td>$<?= $bill['total_amount'] ?></td>
-									<td class="<?= $bill['status'] ? 'text-success' : 'text-danger'?>">
-										<?= $bill['status'] ? 'Paid' : 'Unpaid'?>
+									<td class="<?= $bill['status'] == 1 ? 'text-success' : ($bill['status'] == 2 ? 'text-warning' : 'text-danger')?>">
+										<?= $bill['status'] == 1 ? 'Paid' : ( $bill['status'] == 2 ? 'Confirmed' : 'Unpaid') ?>
 									</td>
 									<?php if (is_admin()): ?>
 										<td>

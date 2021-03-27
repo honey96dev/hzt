@@ -41,4 +41,16 @@ function current_customer_id() {
     }
     return $CI->session->user['id'];
 }
+
+function get_new_notify_count() {
+    $CI =& get_instance();
+    $CI->load->model('notifications_model', 'notifications');
+    return $CI->notifications->get_unread_notifications_count($CI->session->user['id']);
+}
+
+function get_notify() {
+    $CI =& get_instance();
+    $CI->load->model('notifications_model', 'notifications');
+    return $CI->notifications->get_notification_list($CI->session->user['id']);
+}
 ?>

@@ -46,6 +46,6 @@ a.btn {
 	height: 385px;
 }
 
-.apexcharts-canvas {
+#goal-status-chart .apexcharts-canvas {
 	padding-top: 30px;
 }

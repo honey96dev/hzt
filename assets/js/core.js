@@ -367,20 +367,7 @@ $(document).ready(function () {
 					},
 				},
 			},
-			colors: ["#fff"],
-			fill: {
-				type: "gradient",
-				gradient: {
-					shade: "dark",
-					type: "horizontal",
-					shadeIntensity: 0.5,
-					gradientToColors: [$primary],
-					inverseColors: true,
-					opacityFrom: 1,
-					opacityTo: 1,
-					stops: [0, 100],
-				},
-			},
+			colors: [$primary],
 			stroke: {
 				dashArray: 3,
 			},
@@ -465,7 +452,6 @@ $(document).ready(function () {
 			},
 			yaxis: {
 				min: 0,
-				max: 300,
 				tickAmount: 3,
 				labels: {
 					style: {

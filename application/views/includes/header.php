@@ -70,27 +70,48 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<li class="dropdown dropdown-notification nav-item">
                             <a class="nav-link nav-link-label" href="#" data-toggle="dropdown">
                                 <i class="ficon bx bx-bell"></i>
-                                <span class="badge badge-pill badge-primary badge-up">1</span>
+								<?php if (get_new_notify_count() > 0):?>
+                                	<span class="badge badge-pill badge-primary badge-up"><?= get_new_notify_count()?></span>
+								<?php endif;?>
                             </a>
 							<ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
 								<li class="dropdown-menu-header">
-									<div class="dropdown-header px-1 py-75 d-flex justify-content-between">
-                                        <span class="notification-title">1 new Notification</span>
-                                        <span class="text-bold-400 cursor-pointer">Mark all as read</span>
-                                    </div>
+									<?php if (get_new_notify_count() > 0): ?>
+										<div class="dropdown-header px-1 py-75 d-flex justify-content-between">
+											<span class="notification-title"><?= get_new_notify_count() ?> new Notification</span>
+											<span class="text-bold-400 cursor-pointer">Mark all as read</span>
+										</div>
+									<?php else: ?>
+										<div class="dropdown-header px-1 py-75 d-flex justify-content-between">
+											<span class="notification-title">No new notification</span>
+										</div>
+									<?php endif;?>
 								</li>
 								<li class="scrollable-container media-list">
-									<div class="d-flex justify-content-between read-notification cursor-pointer">
-										<div class="media d-flex align-items-center">
-											<div class="media-body">
-												<h6 class="media-heading">
-                                                    <span class="text-bold-500">New Message</span>
-													received
-                                                </h6>
-                                                <small class="notification-text">You have 18 unread messages</small>
+									<?php if (get_new_notify_count() > 0): ?>
+										<?php foreach(get_notify() as $notification):?>
+										<div class="d-flex justify-content-between read-notification cursor-pointer">
+											<div class="media d-flex align-items-center">
+												<div class="media-body">
+													<h6 class="media-heading">
+														<span class="text-bold-500"><?= $notification['detail']?></span>
+													</h6>
+													<small class="notification-text"><?= show_datetime($notification['created_at'])?></small>
+												</div>
 											</div>
 										</div>
-									</div>
+										<?php endforeach;?>
+									<?php else: ?>
+										<div class="d-flex justify-content-between read-notification cursor-pointer">
+											<div class="media d-flex align-items-center">
+												<div class="media-body">
+													<h6 class="media-heading">
+														<span class="text-bold-500">There are no new notifications.</span>
+													</h6>
+												</div>
+											</div>
+										</div>
+									<?php endif;?>
 								</li>
 							</ul>
 						</li>
@@ -106,12 +127,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								</div>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<?php if (is_admin()): ?>
-									<a class="dropdown-item" href="#">
-										<i class="bx bx-envelope mr-50"></i> Goal Status
-									</a>
-								<?php else:?>
-									<a class="dropdown-item" href="#">
+								<?php if (!is_admin()): ?>
+									<a class="dropdown-item" href="<?= base_url('bills')?>">
 										<i class="bx bx-envelope mr-50"></i> My Bills
 									</a>
 								<?php endif;?>
@@ -134,7 +151,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="navbar-header">
 			<ul class="nav navbar-nav flex-row">
 				<li class="nav-item mr-auto">
-					<a class="navbar-brand" href="<?= base_url()?>">
+					<a class="navbar-brand" href="<?= is_admin() ? base_url() : base_url('dashboard/customer')?>">
 						<div class="brand-logo"><img class="logo" src="<?= base_url()?>app-assets/images/logo/logo.png" /></div>
 						<h2 class="brand-text mb-0"><?= APP_TITLE?></h2>
 					</a>
@@ -161,7 +178,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<a href="<?=base_url('customers')?>">
 							<i class="menu-livicon" data-icon="users"></i>
 							<span class="menu-title" data-i18n="">Customers</span>
-							<span class="badge badge-light-warning badge-pill badge-round float-right"><?= get_pendinng_customers()?></span>
+							<span class="badge badge-danger badge-pill badge-round float-right"><?= get_pendinng_customers()?></span>
 						</a>
 					</li>
 				<?php endif;?>

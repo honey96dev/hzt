@@ -10,6 +10,8 @@ class Customers_model extends CI_Model
     {
         parent::__construct();
         $this->table = 'users';
+        $this->load->model('bills_model', 'bills');
+        $this->load->model('notifications_model', 'notifications');
     }
 
     /**
@@ -128,6 +130,15 @@ class Customers_model extends CI_Model
         $new_bill_amount = $customer_info['goal_status'] - $bill_amount;
         return $this->db->update($this->table, ['goal_status' => $new_bill_amount, 'updated_at' => date('Y-m-d H:i:s')], ['id' => $customer_id]);
     }
+
+    public function confirm_status($customer_id = 0) {
+        $origin_customer = $this->get_customer_by_id($customer_id);
+
+        $this->notifications->create_confirm_notify($origin_customer);
+        $this->db->update($this->table, ['goal_status' => 0, 'updated_at' => date('Y-m-d H:i:s')], ['id' => $customer_id]);
+        $this->bills->confirm_bill_status($customer_id);
+    }
+
     /**
      * @return {Boolean} true for success, false for otherwise
      * @param {Array} new customer data
