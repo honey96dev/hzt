@@ -12,8 +12,8 @@
 				<!-- END: Footer-->
 
 				<script>
-					var base_url = "<?=base_url()?>";
-
+					let base_url = "<?=base_url()?>";
+					let mark_all_notify_url = "<?=base_url('notifications/mark_all_as_read')?>";
 				</script>
 
 				<!-- BEGIN: Vendor JS-->

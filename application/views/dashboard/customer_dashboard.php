@@ -90,12 +90,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <li class="timeline-items timeline-icon-primary active">
                                         <div class="timeline-time"><?= date('F, j', strtotime($bill['bill_date']))?></div>
                                         <h6 class="timeline-title"><?= $bill['product_name']?>, <span class="text-info">$<?= $bill['total_amount']?></span></h6>
-                                        <?php if ($bill['status']): ?>
+                                        <?php if ($bill['status'] == 1): ?>
                                         <p class="timeline-text">
                                             <span class="badge badge-light-success">
 												Paid
 											</span>
                                         </p>
+										<?php elseif ($bill['status'] == 2): ?>
+										<p class="timeline-text">
+											<span class="badge badge-light-warning">
+												Confirmed
+											</span>
+										</p>
                                         <?php else: ?>
                                         <p class="timeline-text">
                                             <span class="badge badge-light-danger">

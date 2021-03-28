@@ -59,4 +59,16 @@ class Notifications_model extends CI_Model
         $query = $this->db->get();
         return $query->num_rows();
     }
+
+    public function mark_as_all($user_id = 0) {
+        if ($user_id == 0) {
+            return ['result' => 'error'];
+        }
+
+        if ($this->db->update($this->table, ['status' => 1], ['user_id' => $user_id])) {
+            return ['result' => 'success'];
+        } else {
+            return ['result' => 'error'];
+        }
+    }
 }

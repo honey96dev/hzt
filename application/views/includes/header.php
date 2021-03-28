@@ -71,19 +71,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <a class="nav-link nav-link-label" href="#" data-toggle="dropdown">
                                 <i class="ficon bx bx-bell"></i>
 								<?php if (get_new_notify_count() > 0):?>
-                                	<span class="badge badge-pill badge-primary badge-up"><?= get_new_notify_count()?></span>
+                                	<span class="badge badge-pill badge-primary badge-up" id="notification-number"><?= get_new_notify_count()?></span>
 								<?php endif;?>
                             </a>
 							<ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
 								<li class="dropdown-menu-header">
 									<?php if (get_new_notify_count() > 0): ?>
 										<div class="dropdown-header px-1 py-75 d-flex justify-content-between">
-											<span class="notification-title"><?= get_new_notify_count() ?> new Notification</span>
-											<span class="text-bold-400 cursor-pointer">Mark all as read</span>
+											<span class="notification-title" id="notification-title"><?= get_new_notify_count() ?> new Notification</span>
+											<span class="text-bold-400 cursor-pointer" id="mark-as-all-btn" data-user-id="<?= current_customer_id()?>">Mark all as read</span>
 										</div>
 									<?php else: ?>
 										<div class="dropdown-header px-1 py-75 d-flex justify-content-between">
-											<span class="notification-title">No new notification</span>
+											<span class="notification-title" id="notification-title">No new notification</span>
 										</div>
 									<?php endif;?>
 								</li>
@@ -94,7 +94,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 											<div class="media d-flex align-items-center">
 												<div class="media-body">
 													<h6 class="media-heading">
-														<span class="text-bold-500"><?= $notification['detail']?></span>
+														<span class="notification-detail <?= !$notification['status'] ? 'text-bold-700' : ''?>"><?= $notification['detail']?></span>
 													</h6>
 													<small class="notification-text"><?= show_datetime($notification['created_at'])?></small>
 												</div>

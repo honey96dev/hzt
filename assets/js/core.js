@@ -19,6 +19,26 @@ $(document).ready(function () {
 
 	$(".pickadate").pickadate();
 
+	$("#mark-as-all-btn").on("click", function (e) {
+		e.preventDefault();
+    let user_id = $(this).data("user-id");
+		$.ajax({
+      url: mark_all_notify_url,
+      type: "POST",
+      data: { user_id: user_id},
+      dataType: "json",
+      success: function(res) {
+        if (res.result == "success") {
+          $("#notification-number").remove();
+          $("#notification-title").html("No new notification");
+          $(".notification-detail").removeClass("text-bold-700");
+        }
+      },
+      error: function(err) {
+        console.log(error);
+      }
+    });
+	});
 	/**
 	 * Customer Management Page
 	 */
@@ -158,8 +178,8 @@ $(document).ready(function () {
 	var $warning = "#FDAC41";
 	var $info = "#00CFDD";
 	var $secondary = "#828D99";
-	var $primary_light = '#E2ECFF';
-  var $gray_light = '#828D99';
+	var $primary_light = "#E2ECFF";
+	var $gray_light = "#828D99";
 	var $light_primary = "#E2ECFF";
 
 	// Bill Summary Chart
@@ -389,7 +409,7 @@ $(document).ready(function () {
 		var analyticsBarChartOptions = {
 			chart: {
 				height: 290,
-        width: '100%',
+				width: "100%",
 				type: "bar",
 				toolbar: {
 					show: false,
