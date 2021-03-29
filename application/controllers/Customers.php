@@ -13,7 +13,7 @@ class Customers extends CI_Controller
     {
         $header_data = [
             'menu' => 'customers',
-            'title' => 'Customers',
+            'title' => 'Clientes',
         ];
 
         $data = [

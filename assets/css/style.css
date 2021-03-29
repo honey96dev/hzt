@@ -49,3 +49,11 @@ a.btn {
 #goal-status-chart .apexcharts-canvas {
 	padding-top: 30px;
 }
+
+.logo-style {
+	width: 125px;
+	height: auto;
+	position: absolute;
+	top: 20px;
+	left: 40px;
+}

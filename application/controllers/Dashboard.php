@@ -14,7 +14,7 @@ class Dashboard extends CI_Controller
     {
         $header_data = [
             'menu' => 'dashboard',
-            'title' => 'Dashboard',
+            'title' => 'Tablero de mandos',
         ];
 
         $data = [
@@ -86,7 +86,7 @@ class Dashboard extends CI_Controller
     {
 		$header_data = [
             'menu' => 'dashboard',
-            'title' => 'Dashboard',
+            'title' => 'Tablero de mandos',
         ];
 
 		$customer_id = current_customer_id();

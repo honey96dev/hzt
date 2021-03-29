@@ -5,12 +5,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<!-- Description -->
 	<section class="card">
 		<div class="card-header">
-			<h4 class="card-title">Bills</h4>
+			<h4 class="card-title" data-i18n="Bills">Bills</h4>
 			<?php if (is_admin()): ?>
 			<div class="manage-buttons">
 				<a class="btn btn-primary btn-sm glow mr-1 mb-1" href="<?= $create_url?>">
 					<i class="bx bx-plus"></i>
-					<span class="align-middle ml-25">Add</span>
+					<span class="align-middle ml-25" data-i18n="Add">Add</span>
 				</a>
 			</div>
 			<?php endif;?>
@@ -21,19 +21,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<table class="table bill-table">
 						<thead>
 							<tr>
-								<th>Bill Date</th>
-								<th>Bill Number</th>
-								<?php if (is_admin()): ?>
-									<th>Customer</th>
-									<th>Company</th>
-								<?php endif;?>
-								<th>Product</th>
-								<th>Quantity</th>
-								<th>Amount</th>
-								<th>Status</th>
-								<?php if (is_admin()): ?>
-									<th></th>
-								<?php endif;?>
+								<th data-i18n="Bill Date">Bill Date</th>
+								<th data-i18n="Bill Number">Bill Number</th>
+									<?php if (is_admin()): ?>
+										<th data-i18n="Customer">Customer</th>
+										<th data-i18n="Company">Company</th>
+									<?php endif;?>
+								<th data-i18n="Product">Product</th>
+								<th data-i18n="Quantity">Quantity</th>
+								<th data-i18n="Amount">Amount</th>
+								<th data-i18n="Status">Status</th>
+									<?php if (is_admin()): ?>
+										<th></th>
+									<?php endif;?>
 							</tr>
 						</thead>
 						<tbody>
@@ -58,7 +58,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									<td><?= $bill['quantity'] . ' kg' ?></td>
 									<td>$<?= $bill['total_amount'] ?></td>
 									<td class="<?= $bill['status'] == 1 ? 'text-success' : ($bill['status'] == 2 ? 'text-warning' : 'text-danger')?>">
-										<?= $bill['status'] == 1 ? 'Paid' : ( $bill['status'] == 2 ? 'Confirmed' : 'Unpaid') ?>
+										<?= $bill['status'] == 1 ? 'Pagado' : ( $bill['status'] == 2 ? 'Confirmado' : 'No Pagado') ?>
 									</td>
 									<?php if (is_admin()): ?>
 										<td>
@@ -76,23 +76,23 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<?php endforeach; ?>
 						<?php endif;?>
 						</tbody>
-						<tfoot>
+						<!-- <tfoot>
 							<tr>
-								<th>Bill Date</th>
-								<th>Bill Number</th>
+								<th data-i18n="Bill Date">Bill Date</th>
+								<th data-i18n="Bill Number">Bill Number</th>
 								<?php if (is_admin()): ?>
-									<th>Customer</th>
-									<th>Company</th>
+									<th data-i18n="Customer">Customer</th>
+									<th data-i18n="Company">Company</th>
 								<?php endif;?>
-								<th>Product</th>
-								<th>Quantity</th>
-								<th>Amount</th>
-								<th>Status</th>
+								<th data-i18n="Product">Product</th>
+								<th data-i18n="Quantity">Quantity</th>
+								<th data-i18n="Amount">Amount</th>
+								<th data-i18n="Status">Status</th>
 								<?php if (is_admin()): ?>
 									<th></th>
 								<?php endif;?>
 							</tr>
-						</tfoot>
+						</tfoot> -->
 					</table>
 				</div>
 			</div>

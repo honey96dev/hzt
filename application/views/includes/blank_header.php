@@ -14,7 +14,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<meta name="author" content="">
 	<title><?= APP_TITLE?> - Authentication</title>
 	<link rel="apple-touch-icon" href="<?=base_url('app-assets/images/ico/apple-icon-120.png')?>">
-	<link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>app-assets/images/ico/favicon.ico">
+	<link rel="shortcut icon" href="<?=base_url()?>app-assets/images/ico/favicon.png">
 
 	<!-- BEGIN: Vendor CSS-->
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/vendors.min.css">
@@ -48,7 +48,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <body class="vertical-layout vertical-menu-modern 1-column  navbar-sticky footer-static bg-full-screen-image  blank-page blank-page" data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
     <!-- BEGIN: Content-->
     <div class="app-content content">
-        <div class="content-overlay"></div>
+		<div>
+			<a href="https://www.tradesurcompany.com/">
+				<img class="logo-style" src="//www.tradesurcompany.com/wp-content/uploads/2019/12/TRADESUR-company_1111-scaled.png" alt="TRADESUR CO." data-no-retina="" width="2560" height="1081" data-nsfw-filter-status="sfw" style="visibility: visible;"> 
+			</a>
+		</div>
+        <div class="content-overlay">
+		</div>
         <div class="content-wrapper">
             <div class="content-header row">
             </div>

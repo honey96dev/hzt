@@ -591,7 +591,7 @@
     .use(window.i18nextXHRBackend)
     .init({
       debug: false,
-      fallbackLng: "en",
+      fallbackLng: "es",
       backend: {
         loadPath: base_url + "app-assets/data/locales/{{lng}}.json"
       },
@@ -600,6 +600,9 @@
       function (err, t) {
         // resources have been loaded
         jqueryI18next.init(i18next, $)
+        i18next.changeLanguage('es', function (err, t) {
+          $("body").localize()
+        })
       }
     )
 

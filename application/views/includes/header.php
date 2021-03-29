@@ -13,8 +13,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<meta name="keywords" content="">
 	<meta name="author" content="">
 	<title><?= APP_TITLE?></title>
-	<link rel="apple-touch-icon" href="<?=base_url('app-assets/images/ico/apple-icon-120.png')?>">
-	<link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>app-assets/images/ico/favicon.ico">
+	<!-- <link rel="apple-touch-icon" href="<?=base_url('app-assets/images/ico/apple-icon-120.png')?>"> -->
+	<link rel="shortcut icon" type="image/x-icon" href="<?=base_url()?>app-assets/images/ico/favicon.png">
 
 	<!-- BEGIN: Vendor CSS-->
 	<link rel="stylesheet" type="text/css" href="<?=base_url()?>app-assets/vendors/css/vendors.min.css">
@@ -153,7 +153,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				<li class="nav-item mr-auto">
 					<a class="navbar-brand" href="<?= is_admin() ? base_url() : base_url('dashboard/customer')?>">
 						<div class="brand-logo"><img class="logo" src="<?= base_url()?>app-assets/images/logo/logo.png" /></div>
-						<h2 class="brand-text mb-0"><?= APP_TITLE?></h2>
+						<!-- <h2 class="brand-text mb-0"><?= APP_TITLE?></h2> -->
 					</a>
 				</li>
 				<li class="nav-item nav-toggle">
@@ -170,14 +170,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				<li class="nav-item <?= isset($menu) && $menu == "dashboard" ? "active" : "" ?>">
 					<a href="<?= is_admin() ? base_url() : base_url('dashboard/customer') ?>">
 						<i class="menu-livicon" data-icon="desktop"></i>
-						<span class="menu-title" data-i18n="">Dashboard</span>
+						<span class="menu-title" data-i18n="Dashboard">Dashboard</span>
 					</a>
 				</li>
 				<?php if(is_admin()): ?>
 					<li class="nav-item <?= isset($menu) && $menu == "customers" ? "active" : "" ?>">
 						<a href="<?=base_url('customers')?>">
 							<i class="menu-livicon" data-icon="users"></i>
-							<span class="menu-title" data-i18n="">Customers</span>
+							<span class="menu-title" data-i18n="Customers">Customers</span>
 							<span class="badge badge-danger badge-pill badge-round float-right"><?= get_pendinng_customers()?></span>
 						</a>
 					</li>
@@ -185,7 +185,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <li class="nav-item <?= isset($menu) && $menu == "bills" ? "active" : "" ?>">
 					<a href="<?= base_url('bills')?>">
 						<i class="menu-livicon" data-icon="coins"></i>
-						<span class="menu-title" data-i18n="">Bills</span>
+						<span class="menu-title" data-i18n="Bills">Bills</span>
 					</a>
 				</li>
 			</ul>

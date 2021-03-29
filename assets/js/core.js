@@ -220,12 +220,12 @@ $(document).ready(function () {
 			},
 			series: [
 				{
-					name: "Paid",
+					name: "Pagado",
 					data: summary_paid,
 					type: "area",
 				},
 				{
-					name: "Unpaid",
+					name: "No pagado",
 					data: summary_unpaid,
 					type: "line",
 				},
@@ -301,11 +301,11 @@ $(document).ready(function () {
 			colors: [$info, $danger],
 			series: [
 				{
-					name: "Paid",
+					name: "Pagado",
 					data: paid_bill,
 				},
 				{
-					name: "Unpaid",
+					name: "No pagado",
 					data: unpaid_bill,
 				},
 			],
@@ -448,11 +448,11 @@ $(document).ready(function () {
 			},
 			series: [
 				{
-					name: "Paid",
+					name: "Pagado",
 					data: history_paid,
 				},
 				{
-					name: "Unpaid",
+					name: "No pagado",
 					data: history_unpaid,
 				},
 			],

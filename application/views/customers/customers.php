@@ -5,11 +5,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<!-- Description -->
 	<section class="card">
 		<div class="card-header">
-			<h4 class="card-title">Customers</h4>
+			<h4 class="card-title" data-i18n="Customers">Customers</h4>
 			<div class="manage-buttons">
 				<a class="btn btn-primary btn-sm glow mr-1 mb-1" href="<?= $create_url?>">
 					<i class="bx bx-plus"></i>
-					<span class="align-middle ml-25">Add</span>
+					<span class="align-middle ml-25" data-i18n="Add">Add</span>
 				</a>
 			</div>
 		</div>
@@ -19,13 +19,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<table class="table customer-table">
 						<thead>
 							<tr>
-								<th>Name</th>
-								<th>Email</th>
-								<th>Goal</th>
-								<th>Bill Amount</th>
-								<th>Status</th>
-								<th>Role</th>
-								<th>Registed Date</th>
+								<th data-i18n="Name">Name</th>
+								<th data-i18n="Email">Email</th>
+								<th data-i18n="Goal">Goal</th>
+								<th data-i18n="Bill Amount">Bill Amount</th>
+								<th data-i18n="Status">Status</th>
+								<th data-i18n="Role">Role</th>
+								<th data-i18n="Register Date">Register Date</th>
 								<th></th>
 							</tr>
 						</thead>
@@ -74,7 +74,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<?php endforeach; ?>
 						<?php endif;?>
 						</tbody>
-						<tfoot>
+						<!-- <tfoot>
 							<tr>
 								<th>Name</th>
 								<th>Email</th>
@@ -85,7 +85,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								<th>Registed Date</th>
 								<th></th>
 							</tr>
-						</tfoot>
+						</tfoot> -->
 					</table>
 				</div>
 			</div>

@@ -17,7 +17,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 											<div class="badge-circle badge-circle-lg badge-circle-light-success mx-auto mb-50">
 												<i class="bx bx-user font-medium-5"></i>
 											</div>
-											<div class="text-muted line-ellipsis">Customers</div>
+											<div class="text-muted line-ellipsis" data-i18n="Customers">Customers</div>
 											<h3 class="mb-0"><?= $total_customers?></h3>
 										</div>
 									</div>
@@ -30,7 +30,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 											<div class="badge-circle badge-circle-lg badge-circle-light-info mx-auto mb-50">
 												<i class="bx bx-briefcase-alt font-medium-5"></i>
 											</div>
-											<div class="text-muted line-ellipsis">Total Bills</div>
+											<div class="text-muted line-ellipsis" data-i18n="Total Bills">Total Bills</div>
 											<h3 class="mb-0"><?= $total_bills?></h3>
 										</div>
 									</div>
@@ -43,7 +43,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 											<div class="badge-circle badge-circle-lg badge-circle-light-warning mx-auto mb-50">
 												<i class="bx bx-dollar font-medium-5"></i>
 											</div>
-											<div class="text-muted line-ellipsis">Paid Amount</div>
+											<div class="text-muted line-ellipsis" data-i18n="Paid Amount">Paid Amount</div>
 											<h3 class="mb-0">$<?= show_number($total_paid_amount)?></h3>
 										</div>
 									</div>
@@ -56,7 +56,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 											<div class="badge-circle badge-circle-lg badge-circle-light-danger mx-auto mb-50">
 												<i class="bx bx-briefcase-alt font-medium-5"></i>
 											</div>
-											<div class="text-muted line-ellipsis">Unpaid Amount</div>
+											<div class="text-muted line-ellipsis" data-i18n="Unpaid Amount">Unpaid Amount</div>
 											<h3 class="mb-0">$<?= show_number($total_unpaid_amount)?></h3>
 										</div>
 									</div>
@@ -73,7 +73,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="col-xl-4 col-md-12 col-12">
 				<div class="card">
 					<div class="card-header border-bottom d-flex justify-content-between align-items-center">
-						<h5 class="card-title"><i class="bx bx-dollar font-medium-5 align-middle"></i> <span class="align-middle">Goal Status</span></h5>
+						<h5 class="card-title"><i class="bx bx-dollar font-medium-5 align-middle"></i> <span class="align-middle" data-i18n="Goal Status">Goal Status</span></h5>
 					</div>
 					<div class="main-wrapper-content">
 						<div class="wrapper-content">
@@ -122,7 +122,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-md-8 col-12 order-summary border-right pr-md-0">
 							<div class="card mb-0">
 								<div class="card-header d-flex justify-content-between align-items-center">
-									<h4 class="card-title">Billing Summary (Last 1 month)</h4>
+									<h4 class="card-title" data-i18n="Billing Summary">Billing Summary (Last 30 days)</h4>
 								</div>
 								<div class="card-content">
 									<div class="card-body p-0">
@@ -135,13 +135,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-md-4 col-12 pl-md-0">
 							<div class="card mb-0">
 								<div class="card-header pb-50">
-									<h4 class="card-title">Bills</h4>
+									<h4 class="card-title" data-i18n="Bills">Bills</h4>
 								</div>
 								<div class="card-content">
 									<div class="card-body py-1">
 										<div class="d-flex justify-content-between align-items-center mb-2">
 											<div class="sales-item-name">
-												<p class="mb-0">Total Bills</p>
+												<p class="mb-0" data-i18n="Total Bills">Total Bills</p>
 											</div>
 											<div class="sales-item-amount">
 												<h6 class="mb-0 text-info"> <?= $total_bills?></h6>
@@ -149,7 +149,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 										</div>
 										<div class="d-flex justify-content-between align-items-center mb-2">
 											<div class="sales-item-name">
-												<p class="mb-0">Paid Bills</p>
+												<p class="mb-0" data-i18n="Paid Bills">Paid Bills</p>
 											</div>
 											<div class="sales-item-amount">
 												<h6 class="mb-0 text-success"> <?= $paid_bills?></h6>
@@ -157,7 +157,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 										</div>
 										<div class="d-flex justify-content-between align-items-center">
 											<div class="sales-item-name">
-												<p class="mb-0">Unpaid Bills</p>
+												<p class="mb-0" data-i18n="Unpaid Bills">Unpaid Bills</p>
 											</div>
 											<div class="sales-item-amount">
 												<h6 class="mb-0 text-danger"> <?= $unpaid_bills?></h6>
@@ -165,7 +165,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 										</div>
 									</div>
 									<div class="card-footer border-top pb-0">
-										<h5>Total Billing Amount</h5>
+										<h5 data-i18n="Total Billing Amount">Total Billing Amount</h5>
 										<span class="text-primary text-bold-500">$<?= show_number($total_amount)?></span>
 										<div id="revenue-growth-chart"></div>
 									</div>

@@ -14,7 +14,7 @@ class Bills extends CI_Controller
     {
         $header_data = [
             'menu' => 'bills',
-            'title' => 'Bills',
+            'title' => 'Facturas',
         ];
 
         $data = [

@@ -20,26 +20,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <div class="card-body">
                                     <form id="auth-login-form" action="<?= $login_action_url ?>" method="POST">
                                         <div class="form-group mb-50">
-                                            <label class="text-bold-600" for="identity">Email address or Username</label>
-                                            <input type="text" class="form-control" id="identity" name="identity" placeholder="Email address or Username" data-validation-required-message="This field is required."></div>
+                                            <label class="text-bold-600" for="identity">Email o nombre de usuario</label>
+                                            <input type="text" class="form-control" id="identity" name="identity" placeholder="Email o nombre de usuario" data-validation-required-message="This field is required."></div>
                                         <div class="form-group">
-                                            <label class="text-bold-600" for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" data-validation-required-message="This field is required.">
+                                            <label class="text-bold-600" for="password">Contraseña</label>
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" data-validation-required-message="This field is required.">
                                         </div>
                                         <div class="form-group d-flex flex-md-row flex-column justify-content-between align-items-center">
                                             <div class="text-left">
                                                 <div class="checkbox checkbox-sm">
                                                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                                    <label class="checkboxsmall" for="exampleCheck1"><small>Keep me logged
-                                                            in</small></label>
+                                                    <label class="checkboxsmall" for="exampleCheck1"><small>Mantenme conectado</small></label>
                                                 </div>
                                             </div>
-                                            <div class="text-right"><a href="<?= $forgot_password_url ?>" class="card-link"><small>Forgot Password?</small></a></div>
+                                            <!-- <div class="text-right"><a href="<?= $forgot_password_url ?>" class="card-link"><small>Forgot Password?</small></a></div> -->
                                         </div>
-                                        <button type="submit" class="btn btn-primary glow w-100 position-relative">Login<i id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>
+                                        <button type="submit" class="btn btn-primary glow w-100 position-relative">Iniciar sesión<i id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>
                                     </form>
                                     <hr>
-                                    <div class="text-center"><small class="mr-25">Don't have an account?</small><a href="<?= $signup_url ?>"><small>Sign up</small></a></div>
+                                    <div class="text-center"><small class="mr-25">¿No tienes una cuenta?</small><a href="<?= $signup_url ?>"><small>Regístrate</small></a></div>
                                 </div>
                             </div>
                         </div>
