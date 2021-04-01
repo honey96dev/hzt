@@ -108,7 +108,7 @@ class Bills_model extends CI_Model
 
     public function get_amount_per_product($status = -1, $product_name = '', $customer_id = 0)
     {
-        $this->db->select('SUM(total_amount) as total');
+        $this->db->select('SUM(quantity) as total');
         $this->db->from($this->table);
         if ($status != -1) {
             $this->db->where('status', $status);

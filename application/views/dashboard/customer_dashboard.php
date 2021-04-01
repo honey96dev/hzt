@@ -68,7 +68,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<div class="col-12">
 								<div class="card">
 									<div class="card-header d-flex justify-content-between align-items-center">
-										<h4 class="card-title">Products Summary</h4>
+										<h4 class="card-title">Resumen de productos</h4>
 									</div>
 									<div class="card-content">
 										<div class="card-body pb-1">
