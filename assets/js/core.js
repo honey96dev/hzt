@@ -4,6 +4,7 @@ $(document).ready(function () {
 	let customer_update_msg = "This customer information saved successfully.";
 	let bill_create_msg = "New bill information saved successfully.";
 	let bill_update_msg = "This bill information saved successfully.";
+	let setting_update_msg = "Settings saved successfully.";
 	let error_msg = "Sorry. Something went wrong. Please try again later.";
 
 	$("input[type=checkbox]").on("click", function () {
@@ -21,24 +22,25 @@ $(document).ready(function () {
 
 	$("#mark-as-all-btn").on("click", function (e) {
 		e.preventDefault();
-    let user_id = $(this).data("user-id");
+		let user_id = $(this).data("user-id");
 		$.ajax({
-      url: mark_all_notify_url,
-      type: "POST",
-      data: { user_id: user_id},
-      dataType: "json",
-      success: function(res) {
-        if (res.result == "success") {
-          $("#notification-number").remove();
-          $("#notification-title").html("No new notification");
-          $(".notification-detail").removeClass("text-bold-700");
-        }
-      },
-      error: function(err) {
-        console.log(error);
-      }
-    });
+			url: mark_all_notify_url,
+			type: "POST",
+			data: { user_id: user_id },
+			dataType: "json",
+			success: function (res) {
+				if (res.result == "success") {
+					$("#notification-number").remove();
+					$("#notification-title").html("No new notification");
+					$(".notification-detail").removeClass("text-bold-700");
+				}
+			},
+			error: function (err) {
+				console.log(error);
+			},
+		});
 	});
+
 	/**
 	 * Customer Management Page
 	 */
@@ -171,6 +173,31 @@ $(document).ready(function () {
 	});
 
 	/**
+	 * Setting page
+	 */
+	$("form#change-settings-form").on("submit", function (e) {
+		e.preventDefault();
+		let form = $(this);
+
+		$.ajax({
+			url: form.attr("action"),
+			type: form.attr("method"),
+			data: form.serialize(),
+			dataType: "json",
+			success: function (res) {
+				if (res.result == "success") {
+					toastr.success(setting_update_msg, "Success!", { progressBar: true });
+				} else {
+					toastr.warning(error_msg, "Failed...", { progressBar: true });
+				}
+			},
+			error: function (err) {
+				toastr.warning(error_msg, "Failed...", { progressBar: true });
+			},
+		});
+	});
+
+	/**
 	 * Admin Dashboard Page
 	 */
 	var $primary = "#00CFDD";
@@ -182,86 +209,58 @@ $(document).ready(function () {
 	var $gray_light = "#828D99";
 	var $light_primary = "#E2ECFF";
 
+	$("#admin-summary-daterange").daterangepicker(
+		{},
+		function (start, end, label) {
+			let start_date = start.format("YYYY-MM-DD");
+			let end_date = end.format("YYYY-MM-DD");
+			$.ajax({
+				url: get_summary_chart_data,
+				type: "POST",
+				data: {
+					start: start_date,
+					end: end_date,
+				},
+				dataType: "json",
+				success: function (res) {
+					if (res.result == "success") {
+						drawBillSummaryChart(res.paid, res.unpaid, res.axis);
+					}
+				},
+			});
+		}
+	);
+
+	$("#customer-bill-daterange").daterangepicker(
+		{},
+		function (start, end, label) {
+			let start_date = start.format("YYYY-MM-DD");
+			let end_date = end.format("YYYY-MM-DD");
+			$.ajax({
+				url: get_history_chart_data,
+				type: "POST",
+				data: {
+					start: start_date,
+					end: end_date,
+				},
+				dataType: "json",
+				success: function (res) {
+					if (res.result == "success") {
+						drawBillingHistoryChart(
+							res.paid,
+							res.unpaid,
+							res.confirmed,
+							res.axis
+						);
+					}
+				},
+			});
+		}
+	);
 	// Bill Summary Chart
 	// --------------------
 	if ($("#order-summary-chart").length) {
-		var orderSummaryChartOptions = {
-			chart: {
-				height: 270,
-				type: "line",
-				stacked: false,
-				toolbar: {
-					show: false,
-				},
-				sparkline: {
-					enabled: true,
-				},
-			},
-			colors: [$primary, $primary],
-			dataLabels: {
-				enabled: false,
-			},
-			stroke: {
-				curve: "smooth",
-				width: 2.5,
-				dashArray: [0, 5],
-			},
-			fill: {
-				type: "gradient",
-				gradient: {
-					inverseColors: false,
-					shade: "light",
-					type: "vertical",
-					gradientToColors: [$light_primary, $primary],
-					opacityFrom: 0.7,
-					opacityTo: 0.55,
-					stops: [0, 80, 100],
-				},
-			},
-			series: [
-				{
-					name: "Pagado",
-					data: summary_paid,
-					type: "area",
-				},
-				{
-					name: "No pagado",
-					data: summary_unpaid,
-					type: "line",
-				},
-			],
-			xaxis: {
-				offsetY: -50,
-				categories: summary_axis,
-				axisBorder: {
-					show: false,
-				},
-				axisTicks: {
-					show: false,
-				},
-				labels: {
-					show: true,
-					style: {
-						colors: $secondary,
-					},
-				},
-			},
-			yaxis: {
-				labels: {
-					formatter: (value) => "$ " + value,
-				},
-			},
-			tooltip: {
-				x: { show: false },
-			},
-		};
-
-		var orderSummaryChart = new ApexCharts(
-			document.querySelector("#order-summary-chart"),
-			orderSummaryChartOptions
-		);
-
-		orderSummaryChart.render();
+		drawBillSummaryChart(summary_paid, summary_unpaid, summary_axis);
 	}
 
 	// Revenue Growth Chart
@@ -342,7 +341,6 @@ $(document).ready(function () {
 			document.querySelector("#revenue-growth-chart"),
 			revenueChartOptions
 		);
-
 		revenueChart.render();
 	}
 
@@ -406,6 +404,98 @@ $(document).ready(function () {
 	if ($("#analytics-bar-chart").length) {
 		// Bar Chart
 		// ---------
+		drawBillingHistoryChart(
+			history_paid,
+			history_unpaid,
+			history_confirmed,
+			bill_history_axis
+		);
+	}
+
+	function drawBillSummaryChart(paid, unpaid, axis) {
+		$("#order-summary-chart").html("");
+		var orderSummaryChartOptions = {
+			chart: {
+				height: 270,
+				type: "line",
+				stacked: false,
+				toolbar: {
+					show: false,
+				},
+				sparkline: {
+					enabled: true,
+				},
+			},
+			colors: [$primary, $primary],
+			dataLabels: {
+				enabled: false,
+			},
+			stroke: {
+				curve: "smooth",
+				width: 2.5,
+				dashArray: [0, 5],
+			},
+			fill: {
+				type: "gradient",
+				gradient: {
+					inverseColors: false,
+					shade: "light",
+					type: "vertical",
+					gradientToColors: [$light_primary, $primary],
+					opacityFrom: 0.7,
+					opacityTo: 0.55,
+					stops: [0, 80, 100],
+				},
+			},
+			series: [
+				{
+					name: "Pagado",
+					data: paid,
+					type: "area",
+				},
+				{
+					name: "No pagado",
+					data: unpaid,
+					type: "line",
+				},
+			],
+			xaxis: {
+				offsetY: -40,
+				offsetX: 10,
+				categories: axis,
+				axisBorder: {
+					show: false,
+				},
+				axisTicks: {
+					show: false,
+				},
+				labels: {
+					show: true,
+					style: {
+						colors: $secondary,
+					},
+				},
+			},
+			yaxis: {
+				labels: {
+					formatter: (value) => "$ " + value,
+				},
+			},
+			tooltip: {
+				x: { show: false },
+			},
+		};
+
+		var orderSummaryChart = new ApexCharts(
+			document.querySelector("#order-summary-chart"),
+			orderSummaryChartOptions
+		);
+
+		orderSummaryChart.render();
+	}
+
+	function drawBillingHistoryChart(paid, unpaid, confirmed, axis) {
+		$("#analytics-bar-chart").html("");
 		var analyticsBarChartOptions = {
 			chart: {
 				height: 290,
@@ -418,7 +508,7 @@ $(document).ready(function () {
 			plotOptions: {
 				bar: {
 					horizontal: false,
-					columnWidth: "30%",
+					columnWidth: "50%",
 					endingShape: "rounded",
 				},
 			},
@@ -434,7 +524,7 @@ $(document).ready(function () {
 			dataLabels: {
 				enabled: false,
 			},
-			colors: [$primary, $danger],
+			colors: [$primary, $danger, $warning],
 			fill: {
 				type: "gradient",
 				gradient: {
@@ -449,15 +539,19 @@ $(document).ready(function () {
 			series: [
 				{
 					name: "Pagado",
-					data: history_paid,
+					data: paid,
 				},
 				{
 					name: "No pagado",
-					data: history_unpaid,
+					data: unpaid,
+				},
+				{
+					name: "Confirmed",
+					data: confirmed,
 				},
 			],
 			xaxis: {
-				categories: bill_history_axis,
+				categories: axis,
 				axisBorder: {
 					show: false,
 				},
@@ -493,6 +587,107 @@ $(document).ready(function () {
 
 		var analyticsBarChart = new ApexCharts(
 			document.querySelector("#analytics-bar-chart"),
+			analyticsBarChartOptions
+		);
+
+		analyticsBarChart.render();
+	}
+
+	if ($("#products-bar-chart").length) {
+		var analyticsBarChartOptions = {
+			chart: {
+				height: 215,
+				width: "100%",
+				type: "line",
+				toolbar: {
+					show: false,
+				},
+			},
+      stroke: {
+				curve: "smooth",
+			},
+			plotOptions: {
+				bar: {
+					horizontal: true,
+					columnWidth: "50%",
+					endingShape: "rounded",
+				},
+			},
+			legend: {
+				horizontalAlign: "right",
+				offsetY: -10,
+				markers: {
+					radius: 0,
+					height: 8,
+					width: 8,
+				},
+			},
+			dataLabels: {
+				enabled: false,
+			},
+			colors: [$primary, $danger, $warning],
+			fill: {
+				type: "gradient",
+				gradient: {
+					shade: "light",
+					type: "vertical",
+					inverseColors: true,
+					opacityFrom: 1,
+					opacityTo: 1,
+					stops: [0, 70, 100],
+				},
+			},
+			series: [
+				{
+					name: "Pagado",
+					data: products_paid,
+				},
+				{
+					name: "No pagado",
+					data: products_unpaid,
+				},
+        {
+					name: "Confirmed",
+					data: products_confirmed,
+				},
+			],
+			xaxis: {
+				categories: products_axis,
+				axisBorder: {
+					show: false,
+				},
+				axisTicks: {
+					show: false,
+				},
+				labels: {
+					style: {
+						colors: $gray_light,
+					},
+				},
+			},
+			yaxis: {
+				min: 0,
+				tickAmount: 3,
+				labels: {
+					style: {
+						color: $gray_light,
+					},
+				},
+			},
+			legend: {
+				show: false,
+			},
+			tooltip: {
+				y: {
+					formatter: function (val) {
+						return "$" + val;
+					},
+				},
+			},
+		};
+
+		var analyticsBarChart = new ApexCharts(
+			document.querySelector("#products-bar-chart"),
 			analyticsBarChartOptions
 		);
 

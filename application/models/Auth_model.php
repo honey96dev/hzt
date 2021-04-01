@@ -103,4 +103,33 @@ class Auth_model extends CI_Model
             ];
         }
     }
+
+    public function change($user_id = 0, $settings = []) {
+        if ($user_id == 0) {
+            return ['result' => 'error'];
+        }
+
+        $origin_user = $this->customers->get_customer_by_id($user_id);
+
+        if ($settings['current_password'] != '' && !verify_password($settings['current_password'], $origin_user['password'])) {
+            return ['result' => 'failed'];
+        }
+
+        $new_settings = [
+            'user_name' => $settings['username'],
+            'first_name' => $settings['first_name'],
+            'surname' => $settings['last_name'],
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
+
+        if ($settings['current_password'] != '') {
+            $new_settings['password'] = generate_password($settings['password']);
+        }
+
+        if ($this->db->update($this->table, $new_settings, ['id' => $user_id])) {
+            return ['result' => 'success'];
+        } else {
+            return ['result' => 'error'];
+        }
+    }
 }

@@ -83,8 +83,47 @@ class Bills_model extends CI_Model
         return $query->row_array();
     }
 
-    public function confirm_bill_status($customer_id = 0) {
+    public function confirm_bill_status($customer_id = 0)
+    {
         $this->db->update($this->table, ['status' => 2], ['user_id' => $customer_id, 'status' => 1]);
+    }
+
+    public function get_products_list_for_chart()
+    {
+        $this->db->select('product_name');
+        $this->db->from($this->table);
+        $this->db->group_by('product_name');
+        $query = $this->db->get();
+        $result = $query->result_array();
+
+        $res = [];
+        if (!empty($result)) {
+            foreach ($result as $val) {
+                $res[] = '"' . $val['product_name'] . '"';
+            }
+        }
+
+        return $res;
+    }
+
+    public function get_amount_per_product($status = -1, $product_name = '', $customer_id = 0)
+    {
+        $this->db->select('SUM(total_amount) as total');
+        $this->db->from($this->table);
+        if ($status != -1) {
+            $this->db->where('status', $status);
+        } 
+
+        if ($product_name != '') {
+            $this->db->where('product_name', $product_name);
+        }
+
+        if ($customer_id != 0) {
+            $this->db->where('user_id', $customer_id);
+        }
+        $query = $this->db->get();
+        $result = $query->row_array();
+        return $result['total'] == null ? 0 : $result['total'];
     }
     /**
      * @return {Boolean} true for success, false for otherwise

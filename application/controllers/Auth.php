@@ -63,8 +63,8 @@ class Auth extends CI_Controller
     public function forgot()
     {
         $data = [
-			'signin_url' => base_url('auth'),
-			'signup_url' => base_url('auth/signup'),
+            'signin_url' => base_url('auth'),
+            'signup_url' => base_url('auth/signup'),
             'forgot_action_url' => base_url('auth/forgot_action'),
         ];
 
@@ -82,5 +82,34 @@ class Auth extends CI_Controller
     {
         $this->session->sess_destroy();
         redirect(base_url('auth'));
+    }
+
+    public function change()
+    {
+        $id = current_customer_id();
+
+        $header_data = [
+            'title' => 'Change settings',
+            'change_action_url' => base_url('auth/change_action/' . $id),
+        ];
+
+        $data = [
+            'user' => $this->customers->get_customer_by_id($id),
+        ];
+
+        $this->load->view('includes/header', $header_data);
+        $this->load->view('auth/change_setting', $data);
+        $this->load->view('includes/footer');
+    }
+
+    public function change_action($id = 0) {
+        if ($this->input->post()) {
+            $settings = $this->input->post();
+            $result = $this->auth->change($id, $settings);
+            echo json_encode($result);
+        } else {
+            echo json_encode(['result' => 'error']);
+        }
+        return;
     }
 }

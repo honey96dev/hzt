@@ -7,9 +7,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="col-xl-12 col-12 dashboard-users">
 				<div class="row  ">
 					<!-- Statistics Cards Starts -->
-					<div class="col-12">
+					<div class="col-md-6 col-12">
 						<div class="row">
-							<div class="col-md-3 col-sm-6 col-12 dashboard-users-primary">
+							<div class="col-md-6 col-sm-6 col-12 dashboard-users-primary">
 								<div class="card text-center">
 									<div class="card-content">
 										<div class="card-body py-1">
@@ -22,7 +22,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									</div>
 								</div>
 							</div>
-							<div class="col-md-3 col-sm-6 col-12 dashboard-users-primary">
+							<div class="col-md-6 col-sm-6 col-12 dashboard-users-primary">
 								<div class="card text-center">
 									<div class="card-content">
 										<div class="card-body py-1">
@@ -35,7 +35,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									</div>
 								</div>
 							</div>
-							<div class="col-md-3 col-sm-6 col-12 dashboard-users-primary">
+							<div class="col-md-6 col-sm-6 col-12 dashboard-users-primary">
 								<div class="card text-center">
 									<div class="card-content">
 										<div class="card-body py-1">
@@ -48,7 +48,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									</div>
 								</div>
 							</div>
-							<div class="col-md-3 col-sm-6 col-12 dashboard-users-primary">
+							<div class="col-md-6 col-sm-6 col-12 dashboard-users-primary">
 								<div class="card text-center">
 									<div class="card-content">
 										<div class="card-body py-1">
@@ -57,6 +57,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 											</div>
 											<div class="text-muted line-ellipsis">Unpaid Amount</div>
 											<h3 class="mb-0">$<?= show_number($total_unpaid_amount)?></h3>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-12">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="card-header d-flex justify-content-between align-items-center">
+										<h4 class="card-title">Products Summary</h4>
+									</div>
+									<div class="card-content">
+										<div class="card-body pb-1">
+											<div id="products-bar-chart"></div>
 										</div>
 									</div>
 								</div>
@@ -119,9 +135,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <div class="col-xl-6 col-lg-12 col-12 growth-card">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h4 class="card-title">Billing History in last 15 days</h4>
+                        <h4 class="card-title">Billing History</h4>
                     </div>
                     <div class="card-content">
+						<div class="form-group position-relative has-icon-left admin-bill-summary-daterange">
+							<input type="text" class="form-control daterange" placeholder="Select Date" id="customer-bill-daterange">
+							<div class="form-control-position">
+								<i class='bx bx-calendar-check'></i>
+							</div>
+						</div>
                         <div class="card-body pb-1">
                             <div id="analytics-bar-chart"></div>
                         </div>
@@ -137,4 +159,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
     let bill_history_axis = [<?= implode(',', $bill_history_axis)?>];
     let history_paid = [<?= implode(',', $billing_history_paid) ?>];
 	let history_unpaid = [<?= implode(',', $billing_history_unpaid) ?>];
+	let history_confirmed = [<?= implode(',', $billing_history_confirmed) ?>];
+	let products_axis = [<?= implode(',', $products_axis)?>];
+	let products_paid = [<?= implode(',', $products_paid)?>];
+	let products_unpaid = [<?= implode(',', $products_unpaid)?>];
+	let products_confirmed = [<?= implode(',', $products_confirmed)?>];
+	let get_history_chart_data = "<?= $get_history_chart_data?>";
 </script>

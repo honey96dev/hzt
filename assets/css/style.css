@@ -57,3 +57,10 @@ a.btn {
 	top: 20px;
 	left: 40px;
 }
+
+.admin-bill-summary-daterange {
+	width: 250px;
+    position: absolute !important;
+    right: 10px;
+    top: 15px;
+}

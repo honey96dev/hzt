@@ -131,7 +131,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									<a class="dropdown-item" href="<?= base_url('bills')?>">
 										<i class="bx bx-envelope mr-50"></i> My Bills
 									</a>
+									<div class="dropdown-divider"></div>
 								<?php endif;?>
+								<a class="dropdown-item" href="<?= base_url('auth/change')?>">
+									<i class="bx bx-cog mr-50"></i> Setting
+								</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="<?= base_url('auth/logout')?>">
 									<i class="bx bx-power-off mr-50"></i> Logout

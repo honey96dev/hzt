@@ -8,9 +8,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<div class="col-xl-12 col-12 dashboard-users">
 				<div class="row  ">
 					<!-- Statistics Cards Starts -->
-					<div class="col-12">
+					<div class="col-md-6 col-12">
 						<div class="row">
-							<div class="col-md-3 col-sm-6 col-12 dashboard-users-primary">
+							<div class="col-md-6 col-12 dashboard-users-primary">
 								<div class="card text-center">
 									<div class="card-content">
 										<div class="card-body py-1">
@@ -23,7 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									</div>
 								</div>
 							</div>
-							<div class="col-md-3 col-sm-6 col-12 dashboard-users-primary">
+							<div class="col-md-6 col-12 dashboard-users-primary">
 								<div class="card text-center">
 									<div class="card-content">
 										<div class="card-body py-1">
@@ -36,7 +36,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									</div>
 								</div>
 							</div>
-							<div class="col-md-3 col-sm-6 col-12 dashboard-users-primary">
+							<div class="col-md-6 col-12 dashboard-users-primary">
 								<div class="card text-center">
 									<div class="card-content">
 										<div class="card-body py-1">
@@ -49,7 +49,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									</div>
 								</div>
 							</div>
-							<div class="col-md-3 col-sm-6 col-12 dashboard-users-primary">
+							<div class="col-md-6 col-12 dashboard-users-primary">
 								<div class="card text-center">
 									<div class="card-content">
 										<div class="card-body py-1">
@@ -58,6 +58,22 @@ defined('BASEPATH') or exit('No direct script access allowed');
 											</div>
 											<div class="text-muted line-ellipsis" data-i18n="Unpaid Amount">Unpaid Amount</div>
 											<h3 class="mb-0">$<?= show_number($total_unpaid_amount)?></h3>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6 col-12">
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="card-header d-flex justify-content-between align-items-center">
+										<h4 class="card-title">Products Summary</h4>
+									</div>
+									<div class="card-content">
+										<div class="card-body pb-1">
+											<div id="products-bar-chart"></div>
 										</div>
 									</div>
 								</div>
@@ -122,9 +138,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="col-md-8 col-12 order-summary border-right pr-md-0">
 							<div class="card mb-0">
 								<div class="card-header d-flex justify-content-between align-items-center">
-									<h4 class="card-title" data-i18n="Billing Summary">Billing Summary (Last 30 days)</h4>
+									<h4 class="card-title" data-i18n="Billing Summary">Billing Summary</h4>
 								</div>
 								<div class="card-content">
+									<div class="form-group position-relative has-icon-left admin-bill-summary-daterange">
+										<input type="text" class="form-control daterange" placeholder="Select Date" id="admin-summary-daterange">
+										<div class="form-control-position">
+											<i class='bx bx-calendar-check'></i>
+										</div>
+									</div>
 									<div class="card-body p-0">
 										<div id="order-summary-chart"></div>
 									</div>
@@ -187,4 +209,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	let bill_axis = [<?= implode(',', $bill_axis)?>];
 	let paid_bill = [<?= implode(',', $paid_bill)?>];
 	let unpaid_bill = [<?= implode(',', $unpaid_bill)?>];
+	let products_axis = [<?= implode(',', $products_axis)?>];
+	let products_paid = [<?= implode(',', $products_paid)?>];
+	let products_unpaid = [<?= implode(',', $products_unpaid)?>];
+	let products_confirmed = [<?= implode(',', $products_confirmed)?>];
+	let get_summary_chart_data = "<?= $get_summary_chart_data?>";
 </script>
