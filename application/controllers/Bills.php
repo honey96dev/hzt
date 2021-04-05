@@ -36,7 +36,7 @@ class Bills extends CI_Controller
     {
         $header_data = [
             'menu' => 'bills',
-            'title' => 'Add a new Bill',
+            'title' => 'Añadir un nuevo proyecto de ley',
             'create_action_url' => base_url('bills/create_action'),
         ];
 
@@ -88,7 +88,7 @@ class Bills extends CI_Controller
 
         $header_data = [
             'menu' => 'bills',
-            'title' => 'Edit a new bill',
+            'title' => 'Editar un nuevo proyecto de ley',
             'update_action_url' => base_url('bills/update_action/' . $id),
         ];
 

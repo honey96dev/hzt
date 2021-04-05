@@ -13,20 +13,20 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <div class="card disable-rounded-right mb-0 p-2">
                             <div class="card-header pb-1">
                                 <div class="card-title">
-                                    <h4 class="text-center mb-2">Forgot Password?</h4>
+                                    <h4 class="text-center mb-2" data-i18n="Forgot Password">Forgot Password?</h4>
                                 </div>
                             </div>
                             <div class="form-group d-flex justify-content-between align-items-center mb-2">
                                 <div class="text-left">
                                     <div class="ml-3 ml-md-2 mr-1">
                                         <a href="<?= $signin_url?>" class="card-link btn btn-primary text-nowrap">
-                                            Sign in
+                                            Iniciar sesión
                                         </a>
                                     </div>
                                 </div>
                                 <div class="mr-3">
                                     <a href="<?= $signup_url?>" class="card-link btn btn-primary text-nowrap">
-                                        Sign up
+                                        Regístrate
                                     </a>
                                 </div>
                             </div>
@@ -34,7 +34,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <div class="card-body">
                                     <div class="text-muted text-center mb-2">
                                         <small>
-                                            Enter the email you used when you joined and we will send you temporary password
+                                            Ingrese el correo electrónico que utilizó cuando se inscribió y le enviaremos una contraseña temporal.
                                         </small>
                                     </div>
                                     <form class="mb-2" action="index.html">
@@ -43,7 +43,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <input type="text" class="form-control" id="exampleInputEmailPhone1" placeholder="Email">
                                         </div>
                                         <button type="submit" class="btn btn-primary glow position-relative w-100">
-                                            SEND PASSWORD<i id="icon-arrow" class="bx bx-right-arrow-alt"></i>
+                                            Enviar contraseña<i id="icon-arrow" class="bx bx-right-arrow-alt"></i>
                                         </button>
                                     </form>
                                 </div>

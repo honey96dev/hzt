@@ -16,7 +16,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 											<div class="badge-circle badge-circle-lg badge-circle-light-success mx-auto mb-50">
 												<i class="bx bx-dollar font-medium-5"></i>
 											</div>
-											<div class="text-muted line-ellipsis">My Goal</div>
+											<div class="text-muted line-ellipsis" data-i18n="My Goal">My Goal</div>
 											<h3 class="mb-0">$<?= show_number($my_goal)?></h3>
 										</div>
 									</div>
@@ -29,7 +29,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 											<div class="badge-circle badge-circle-lg badge-circle-light-info mx-auto mb-50">
 												<i class="bx bx-briefcase-alt font-medium-5"></i>
 											</div>
-											<div class="text-muted line-ellipsis">Total Bills</div>
+											<div class="text-muted line-ellipsis" data-i18n="Total Bills">Total Bills</div>
 											<h3 class="mb-0"><?= $total_bills?></h3>
 										</div>
 									</div>
@@ -42,7 +42,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 											<div class="badge-circle badge-circle-lg badge-circle-light-warning mx-auto mb-50">
 												<i class="bx bx-dollar font-medium-5"></i>
 											</div>
-											<div class="text-muted line-ellipsis">Paid Amount</div>
+											<div class="text-muted line-ellipsis" data-i18n="Paid Amount">Paid Amount</div>
 											<h3 class="mb-0">$<?= show_number($total_paid_amount)?></h3>
 										</div>
 									</div>
@@ -55,7 +55,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 											<div class="badge-circle badge-circle-lg badge-circle-light-danger mx-auto mb-50">
 												<i class="bx bx-briefcase-alt font-medium-5"></i>
 											</div>
-											<div class="text-muted line-ellipsis">Unpaid Amount</div>
+											<div class="text-muted line-ellipsis" data-i18n="Unpaid Amount">Unpaid Amount</div>
 											<h3 class="mb-0">$<?= show_number($total_unpaid_amount)?></h3>
 										</div>
 									</div>
@@ -88,14 +88,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="card">
                     <div class="card-body text-center goal-status-card">
                         <div id="goal-status-chart"></div>
-                        <h6 class="mb-0"> <?= $goal_status_percent?>% Goal Status on <?= show_date(date('Y-m-d'))?></h6>
+                        <h6 class="mb-0"> <?= $goal_status_percent?>% Estado de meta <?= show_date(date('Y-m-d'))?></h6>
                     </div>
                 </div>
             </div>
             <div class="col-xl-3 col-lg-6 col-12">
                 <div class="card customer-timeline">
                     <div class="card-header">
-                        <h4 class="card-title">
+                        <h4 class="card-title" data-i18n="Bills Timeline">
                             Bills Timeline
                         </h4>
                     </div>
@@ -108,19 +108,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         <h6 class="timeline-title"><?= $bill['product_name']?>, <span class="text-info">$<?= $bill['total_amount']?></span></h6>
                                         <?php if ($bill['status'] == 1): ?>
                                         <p class="timeline-text">
-                                            <span class="badge badge-light-success">
+                                            <span class="badge badge-light-success" data-i18n="Paid">
 												Paid
 											</span>
                                         </p>
 										<?php elseif ($bill['status'] == 2): ?>
 										<p class="timeline-text">
-											<span class="badge badge-light-warning">
+											<span class="badge badge-light-warning" data-i18n="Confirmed">
 												Confirmed
 											</span>
 										</p>
                                         <?php else: ?>
                                         <p class="timeline-text">
-                                            <span class="badge badge-light-danger">
+                                            <span class="badge badge-light-danger" data-i18n="Unpaid">
 												Unpaid
 											</span>
                                         </p>
@@ -135,7 +135,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
             <div class="col-xl-6 col-lg-12 col-12 growth-card">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h4 class="card-title">Billing History</h4>
+                        <h4 class="card-title" data-i18n="Billing History">Billing History</h4>
                     </div>
                     <div class="card-content">
 						<div class="form-group position-relative has-icon-left admin-bill-summary-daterange">

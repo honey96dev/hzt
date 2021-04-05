@@ -41,9 +41,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<?php if (empty($bills)):?>
 							<tr>
 								<?php if (is_admin()): ?>
-									<td colspan="9" class="text-center">There are no bills.</td>
+									<td colspan="9" class="text-center"> No hay facturas.</td>
 								<?php else: ?>
-									<td colspan="6" class="text-center">There are no bills.</td>
+									<td colspan="6" class="text-center">No hay facturas.</td>
 								<?php endif;?>
 							</tr>
 						<?php else: ?>
@@ -72,8 +72,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 												<span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">
 												</span>
 												<div class="dropdown-menu dropdown-menu-right">
-													<a class="dropdown-item" href="<?= $update_url . '/' . $bill['id'] ?>"><i class="bx bx-edit-alt mr-1"></i> edit</a>
-													<a class="dropdown-item delete-bill-btn" href="<?= $delete_url . '/' . $bill['id'] ?>"><i class="bx bx-trash mr-1"></i> delete</a>
+													<a class="dropdown-item" href="<?= $update_url . '/' . $bill['id'] ?>"><i class="bx bx-edit-alt mr-1"></i> Editar</a>
+													<a class="dropdown-item delete-bill-btn" href="<?= $delete_url . '/' . $bill['id'] ?>"><i class="bx bx-trash mr-1"></i> Eliminar</a>
 												</div>
 											</div>
 										</td>

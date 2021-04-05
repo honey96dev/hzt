@@ -32,7 +32,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<tbody>
 						<?php if (empty($customers)):?>
 							<tr>
-								<td colspan=7>There are no cutomers.</td>
+								<td colspan=7>No hay clientes.</td>
 							</tr>
 						<?php else: ?>
 							<?php foreach($customers as $customer) :?>
@@ -43,7 +43,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									<td class="<?= $customer['goal_status'] < $customer['goal'] ? 'text-primary' : 'text-success' ?>">
 										$<?= $customer['goal_status'] ?>
 										<?php if ($customer['goal_status'] >= $customer['goal']):?>
-											<span class="badge badge-light-success">
+											<span class="badge badge-light-success" data-i18n="Goal">
 												Goal
 											</span>
 										<?php endif;?>
@@ -63,10 +63,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 											</span>
 											<div class="dropdown-menu dropdown-menu-right">
 												<?php if($customer['goal_status'] >= $customer['goal']): ?>
-													<a class="dropdown-item" href="<?= $confirm_url . '/' . $customer['id'] ?>"><i class="bx bx-rocket mr-1"></i> confirm</a>
+													<a class="dropdown-item" href="<?= $confirm_url . '/' . $customer['id'] ?>"><i class="bx bx-rocket mr-1"></i> Confirmar</a>
 												<?php endif;?>
-												<a class="dropdown-item" href="<?= $update_url . '/' . $customer['id'] ?>"><i class="bx bx-edit-alt mr-1"></i> edit</a>
-												<a class="dropdown-item delete-cusomer-btn" href="<?= $delete_url . '/' . $customer['id'] ?>"><i class="bx bx-trash mr-1"></i> delete</a>
+												<a class="dropdown-item" href="<?= $update_url . '/' . $customer['id'] ?>"><i class="bx bx-edit-alt mr-1"></i> Editar</a>
+												<a class="dropdown-item delete-cusomer-btn" href="<?= $delete_url . '/' . $customer['id'] ?>"><i class="bx bx-trash mr-1"></i> Eliminar</a>
 											</div>
 										</div>
 									</td>

@@ -13,7 +13,7 @@ class Products extends CI_Controller
     {
         $header_data = [
             'menu' => 'products',
-            'title' => 'Products',
+            'title' => 'Productos',
         ];
 
         $data = [
@@ -33,7 +33,7 @@ class Products extends CI_Controller
     {
         $header_data = [
             'menu' => 'products',
-            'title' => 'Add a new Product',
+            'title' => 'Agregar un nuevo producto',
             'create_action_url' => base_url('products/create_action'),
         ];
 
@@ -65,7 +65,7 @@ class Products extends CI_Controller
 
         $header_data = [
             'menu' => 'products',
-            'title' => 'Edit a new Product',
+            'title' => 'Editar un nuevo producto',
             'update_action_url' => base_url('products/update_action/' . $id),
         ];
 
