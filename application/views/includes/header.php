@@ -192,6 +192,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<span class="menu-title" data-i18n="Bills">Bills</span>
 					</a>
 				</li>
+				<?php if(is_admin()): ?>
+					<li class="nav-item <?= isset($menu) && $menu == "products" ? "active" : "" ?>">
+						<a href="<?=base_url('products')?>">
+							<i class="menu-livicon" data-icon="gift"></i>
+							<span class="menu-title" data-i18n="Products">Products</span>
+						</a>
+					</li>
+				<?php endif;?>
 			</ul>
 		</div>
 	</div>

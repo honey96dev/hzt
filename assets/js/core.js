@@ -4,6 +4,8 @@ $(document).ready(function () {
 	let customer_update_msg = "This customer information saved successfully.";
 	let bill_create_msg = "New bill information saved successfully.";
 	let bill_update_msg = "This bill information saved successfully.";
+	let product_create_msg = "New product information saved successfully.";
+	let product_update_msg = "This product information saved successfully.";
 	let setting_update_msg = "Settings saved successfully.";
 	let error_msg = "Sorry. Something went wrong. Please try again later.";
 
@@ -126,10 +128,7 @@ $(document).ready(function () {
 		e.preventDefault();
 		let form = $(this);
 
-		$.ajax({
-			url: form.attr("action"),
-			type: form.attr("method"),
-			data: form.serialize(),
+		$(form).ajaxSubmit({
 			dataType: "json",
 			success: function (res) {
 				if (res.result == "success") {
@@ -154,10 +153,7 @@ $(document).ready(function () {
 		e.preventDefault();
 		let form = $(this);
 
-		$.ajax({
-			url: form.attr("action"),
-			type: form.attr("method"),
-			data: form.serialize(),
+		$(form).ajaxSubmit({
 			dataType: "json",
 			success: function (res) {
 				if (res.result == "success") {
@@ -187,6 +183,60 @@ $(document).ready(function () {
 			success: function (res) {
 				if (res.result == "success") {
 					toastr.success(setting_update_msg, "Success!", { progressBar: true });
+				} else {
+					toastr.warning(error_msg, "Failed...", { progressBar: true });
+				}
+			},
+			error: function (err) {
+				toastr.warning(error_msg, "Failed...", { progressBar: true });
+			},
+		});
+	});
+
+	/**
+	 * Product Create Page
+	 */
+
+	 $("form#product-create-form").on("submit", function (e) {
+		e.preventDefault();
+		let form = $(this);
+
+		$.ajax({
+			url: form.attr("action"),
+			type: form.attr("method"),
+			data: form.serialize(),
+			dataType: "json",
+			success: function (res) {
+				if (res.result == "success") {
+					toastr.success(product_create_msg, "Success!", { progressBar: true });
+					// $("#bill-create-form input").not("[type=checkbox]").val("");
+					// $("[type=checkbox]").val("off");
+				} else {
+					toastr.warning(error_msg, "Failed...", { progressBar: true });
+				}
+			},
+			error: function (err) {
+				toastr.warning(error_msg, "Failed...", { progressBar: true });
+			},
+		});
+	});
+
+	/**
+	 * Product Update Page
+	 */
+
+	$("form#product-update-form").on("submit", function (e) {
+		e.preventDefault();
+		let form = $(this);
+
+		$.ajax({
+			url: form.attr("action"),
+			type: form.attr("method"),
+			data: form.serialize(),
+			dataType: "json",
+			success: function (res) {
+				if (res.result == "success") {
+					toastr.success(product_update_msg, "Success!", { progressBar: true });
 				} else {
 					toastr.warning(error_msg, "Failed...", { progressBar: true });
 				}
@@ -598,7 +648,7 @@ $(document).ready(function () {
 			chart: {
 				height: 215,
 				width: "100%",
-				type: "line",
+				type: "bar",
 				toolbar: {
 					show: false,
 				},

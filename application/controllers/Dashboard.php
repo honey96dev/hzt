@@ -8,6 +8,7 @@ class Dashboard extends CI_Controller
         parent::__construct();
         $this->load->model('customers_model', 'customers');
         $this->load->model('bills_model', 'bills');
+        $this->load->model('products_model', 'products');
     }
 
     public function index()
@@ -79,17 +80,17 @@ class Dashboard extends CI_Controller
         $data['unpaid_bill'] = $unpaid_bill;
         
         $products_axis = $this->bills->get_products_list_for_chart();
-        $data['products_axis'] = $products_axis;
+        $data['products_axis'] = $this->get_products_name_for_chart($products_axis);
 
         $products_paid = [];
         $products_unpaid = [];
         $products_confirmed = [];
         for ($i = 0, $l = count($products_axis); $i < $l; $i++) {
-            $item_paid = $this->bills->get_amount_per_product(1, substr($products_axis[$i], 1, -1));
+            $item_paid = $this->bills->get_amount_per_product(1, $products_axis[$i]);
             $products_paid[] = $item_paid;
-            $item_unpaid = $this->bills->get_amount_per_product(0, substr($products_axis[$i], 1, -1));
+            $item_unpaid = $this->bills->get_amount_per_product(0, $products_axis[$i]);
             $products_unpaid[] = $item_unpaid;
-            $item_confirmed = $this->bills->get_amount_per_product(2, substr($products_axis[$i], 1, -1));
+            $item_confirmed = $this->bills->get_amount_per_product(2, $products_axis[$i]);
             $products_confirmed[] = $item_confirmed;
         }
 
@@ -159,7 +160,7 @@ class Dashboard extends CI_Controller
             'total_paid_amount' => $this->bills->get_total_billing_amount_by_status(1, '', $customer_id),
             'total_unpaid_amount' => $this->bills->get_total_billing_amount_by_status(0, '', $customer_id),
             'goal_status_percent' => $percent,
-            'bill_list' => $this->bills->get_bill_list('user_id = ' . $customer_id, 3, 0, 'bill_date', 'desc'),
+            'bill_list' => $this->bills->get_bill_list('user_id = ' . $customer_id, 0, 0, 'bill_date', 'desc'),
             'get_history_chart_data' => base_url('dashboard/get_history_chart_data'),
         ];
 
@@ -193,7 +194,7 @@ class Dashboard extends CI_Controller
         $data['billing_history_confirmed'] = $billing_confirmed_value;
 
         $products_axis = $this->bills->get_products_list_for_chart();
-        $data['products_axis'] = $products_axis;
+        $data['products_axis'] = $this->get_products_name_for_chart($products_axis);
         
         $products_paid = [];
         $products_unpaid = [];
@@ -257,5 +258,18 @@ class Dashboard extends CI_Controller
             echo json_encode($data);
             return;
         }
+    }
+
+    public function get_products_name_for_chart($product_ids = []) {
+        if (empty($product_ids)) {
+            return [];
+        }
+
+        $res = [];
+        foreach($product_ids as $id) {
+            $res[] = '"' . $this->products->get_product_by_id($id)['product_name'] . '"';
+        }
+
+        return $res;
     }
 }

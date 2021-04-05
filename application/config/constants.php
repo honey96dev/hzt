@@ -85,3 +85,8 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 defined('APP_TITLE')      OR define('APP_TITLE', "Comercio");
+defined('PROFILE_IMAGE_PATH')      OR define('PROFILE_IMAGE_PATH', FCPATH . 'uploads/profile');
+defined('BILLING_DOC_PATH')      OR define('BILLING_DOC_PATH', FCPATH . 'uploads/bills');
+
+defined('PROFILE_IMAGE_URL')      OR define('PROFILE_IMAGE_URL', 'uploads/profile/');
+defined('BILLING_DOC_URL')      OR define('BILLING_DOC_URL', 'uploads/bills/');

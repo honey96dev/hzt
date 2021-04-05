@@ -64,3 +64,17 @@ a.btn {
     right: 10px;
     top: 15px;
 }
+
+.card.customer-timeline {
+	height: 385px;
+}
+
+.customer-timeline .widget-timeline {
+	height: 300px;
+	overflow: auto;
+}
+
+.widget-timeline::-webkit-scrollbar {
+	width: 3px;
+}
+

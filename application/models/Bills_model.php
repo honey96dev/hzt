@@ -11,6 +11,7 @@ class Bills_model extends CI_Model
         parent::__construct();
         $this->table = 'bills';
         $this->customer_table = 'users';
+        $this->product_table = 'products';
         $this->load->model('notifications_model', 'notifications');
     }
 
@@ -20,12 +21,13 @@ class Bills_model extends CI_Model
      */
     public function get_bill_list($filter = '', $limit = 0, $offset = 0, $order = '', $dir = 'asc')
     {
-        $this->db->select("$this->table.*, $this->customer_table.first_name as first_name, $this->customer_table.surname as surname");
+        $this->db->select("$this->table.*, $this->customer_table.first_name as first_name, $this->customer_table.surname as surname, $this->product_table.product_name as product_name");
         $this->db->from($this->table);
         if ($filter != '') {
             $this->db->where('(' . $filter . ')');
         }
         $this->db->join($this->customer_table, "$this->customer_table.id = $this->table.user_id", "left");
+        $this->db->join($this->product_table, "$this->product_table.id = $this->table.product_id", "left");
         if ($order != '') {
             $this->db->order_by($order, $dir);
         } else {
@@ -51,7 +53,7 @@ class Bills_model extends CI_Model
         return $query->num_rows();
     }
 
-    public function get_total_billing_amount_by_status($status = -1, $bill_date = '', $customer_id = 0)
+    public function get_total_billing_amount_by_status($status = -1, $bill_date = '', $customer_id = 0, $product_id = 0)
     {
         $this->db->select('SUM(total_amount) as total');
         $this->db->from($this->table);
@@ -65,6 +67,10 @@ class Bills_model extends CI_Model
 
         if ($customer_id != 0) {
             $this->db->where('user_id', $customer_id);
+        }
+
+        if ($product_id != 0) {
+            $this->db->where('product_id', $product_id);
         }
         $query = $this->db->get();
         $result = $query->row_array();
@@ -90,23 +96,24 @@ class Bills_model extends CI_Model
 
     public function get_products_list_for_chart()
     {
-        $this->db->select('product_name');
+        $this->db->select('product_id');
         $this->db->from($this->table);
-        $this->db->group_by('product_name');
+        $this->db->join($this->product_table, "$this->product_table.id = $this->table.product_id", "left");
+        $this->db->group_by('product_id');
         $query = $this->db->get();
         $result = $query->result_array();
 
         $res = [];
         if (!empty($result)) {
             foreach ($result as $val) {
-                $res[] = '"' . $val['product_name'] . '"';
+                $res[] = $val['product_id'];
             }
         }
 
         return $res;
     }
 
-    public function get_amount_per_product($status = -1, $product_name = '', $customer_id = 0)
+    public function get_amount_per_product($status = -1, $product_id = 0, $customer_id = 0)
     {
         $this->db->select('SUM(quantity) as total');
         $this->db->from($this->table);
@@ -114,8 +121,8 @@ class Bills_model extends CI_Model
             $this->db->where('status', $status);
         } 
 
-        if ($product_name != '') {
-            $this->db->where('product_name', $product_name);
+        if ($product_id != '') {
+            $this->db->where('product_id', $product_id);
         }
 
         if ($customer_id != 0) {
@@ -140,10 +147,11 @@ class Bills_model extends CI_Model
             'tax_id' => $new_data['tax_id'],
             'user_id' => $new_data['customer'],
             'company_name' => $new_data['company_name'],
-            'product_name' => $new_data['product_name'],
+            'product_id' => $new_data['product_name'],
             'quantity' => $new_data['quantity'],
             'total_amount' => $new_data['total_amount'],
             'bill_date' => date('Y-m-d', (int) strtotime($new_data['bill_date'])),
+            'bill_doc' => $new_data['bill_doc'],
             'status' => (isset($new_data['status']) && $new_data['status'] == "on") ? 1 : 0,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
@@ -180,10 +188,11 @@ class Bills_model extends CI_Model
             'tax_id' => $new_data['tax_id'],
             'user_id' => $new_data['customer'],
             'company_name' => $new_data['company_name'],
-            'product_name' => $new_data['product_name'],
+            'product_id' => $new_data['product_name'],
             'quantity' => $new_data['quantity'],
             'total_amount' => $new_data['total_amount'],
             'bill_date' => date('Y-m-d', (int) strtotime($new_data['bill_date'])),
+            'bill_doc' => $new_data['bill_doc'],
             'status' => (isset($new_data['status']) && $new_data['status'] == "on") ? 1 : 0,
             'updated_at' => date('Y-m-d H:i:s'),
         ];

@@ -93,7 +93,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 </div>
             </div>
             <div class="col-xl-3 col-lg-6 col-12">
-                <div class="card ">
+                <div class="card customer-timeline">
                     <div class="card-header">
                         <h4 class="card-title">
                             Bills Timeline

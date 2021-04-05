@@ -23,17 +23,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 							<tr>
 								<th data-i18n="Bill Date">Bill Date</th>
 								<th data-i18n="Bill Number">Bill Number</th>
-									<?php if (is_admin()): ?>
-										<th data-i18n="Customer">Customer</th>
-										<th data-i18n="Company">Company</th>
-									<?php endif;?>
+								<?php if (is_admin()): ?>
+									<th data-i18n="Customer">Customer</th>
+									<th data-i18n="Company">Company</th>
+								<?php endif;?>
+								<th data-i18n="">Attachment</th>
 								<th data-i18n="Product">Product</th>
 								<th data-i18n="Quantity">Quantity</th>
 								<th data-i18n="Amount">Amount</th>
 								<th data-i18n="Status">Status</th>
-									<?php if (is_admin()): ?>
-										<th></th>
-									<?php endif;?>
+								<?php if (is_admin()): ?>
+									<th></th>
+								<?php endif;?>
 							</tr>
 						</thead>
 						<tbody>
@@ -54,6 +55,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 										<td><?= $bill['first_name'] . ' ' . $bill['surname'] ?></td>
 										<td><?= $bill['company_name'] ?></td>
 									<?php endif;?>
+									<td>
+										<?php if($bill['bill_doc'] != ''): ?>
+											<a href="<?= BILLING_DOC_URL . $bill['bill_doc']?>" target="_blank"><i class="bx bx-file-blank"></i></a>
+										<?php endif;?>
+									</td>
 									<td><?= $bill['product_name'] ?></td>
 									<td><?= $bill['quantity'] . ' kg' ?></td>
 									<td>$<?= $bill['total_amount'] ?></td>

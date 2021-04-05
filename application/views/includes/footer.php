@@ -38,6 +38,7 @@
 				<script src="<?=base_url()?>app-assets/vendors/js/pickers/daterange/moment.min.js"></script>
 				<script src="<?=base_url()?>app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
 				<script src="<?=base_url()?>app-assets/vendors/js/charts/apexcharts.min.js"></script>
+				<script src="https://cdn.jsdelivr.net/gh/jquery-form/form@4.2.2/dist/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
 				<!-- END: Page Vendor JS-->
 
 				<!-- BEGIN: Theme JS-->

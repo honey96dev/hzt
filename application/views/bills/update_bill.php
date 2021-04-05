@@ -27,7 +27,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             <div class="form-group">
                                 <label>Product Name</label>
                                 <div class="controls">
-                                    <input type="text" name="product_name" class="form-control" data-validation-required-message="Product Name is required." placeholder="Product Name" value="<?= $bill['product_name'] ?>">
+                                    <select name="product_name" class="form-control">
+                                        <?php foreach($products as $product):?>
+                                            <option value="<?= $product['id']?>" <?= $bill['product_id'] == $product['id'] ? 'selected' : ''?>><?= $product['product_name']?></option>
+                                        <?php endforeach;?>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -72,6 +76,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                 <label>Bill Date</label>
                                 <div class="controls">
                                     <input type="text" name="bill_date" class="form-control pickadate" data-validation-required-message="Bill date is required." placeholder="Bill Date" value="<?= show_date($bill['bill_date']) ?>">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Bill Document File</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="bill-file" aria-describedby="inputGroupFileAddon01" name="bill_doc">
+                                    <label class="custom-file-label" for="bill-file">Choose file</label>
                                 </div>
                             </div>
                             <div class="checkbox mr-2 mt-2 mb-1">
