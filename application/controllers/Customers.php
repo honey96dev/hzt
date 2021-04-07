@@ -33,7 +33,7 @@ class Customers extends CI_Controller
     {
         $header_data = [
             'menu' => 'customers',
-            'title' => 'Add a new Customer',
+            'title' => 'Agregar un nuevo cliente',
             'create_action_url' => base_url('customers/create_action'),
         ];
 
@@ -65,7 +65,7 @@ class Customers extends CI_Controller
 
         $header_data = [
             'menu' => 'customers',
-            'title' => 'Edit a new Customer',
+            'title' => 'Editar un nuevo cliente',
             'update_action_url' => base_url('customers/update_action/' . $id),
         ];
 

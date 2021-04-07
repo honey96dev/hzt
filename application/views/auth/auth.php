@@ -33,7 +33,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                                     <label class="checkboxsmall" for="exampleCheck1"><small>Mantenme conectado</small></label>
                                                 </div>
                                             </div>
-                                            <!-- <div class="text-right"><a href="<?= $forgot_password_url ?>" class="card-link"><small>Forgot Password?</small></a></div> -->
+                                            <div class="text-right"><a href="<?= $forgot_password_url ?>" class="card-link"><small data-i18n="Forgot Password">Forgot Password?</small></a></div>
                                         </div>
                                         <button type="submit" class="btn btn-primary glow w-100 position-relative">Iniciar sesión<i id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>
                                     </form>

@@ -78,12 +78,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								<li class="dropdown-menu-header">
 									<?php if (get_new_notify_count() > 0): ?>
 										<div class="dropdown-header px-1 py-75 d-flex justify-content-between">
-											<span class="notification-title" id="notification-title"><?= get_new_notify_count() ?> new Notification</span>
-											<span class="text-bold-400 cursor-pointer" id="mark-as-all-btn" data-user-id="<?= current_customer_id()?>">Mark all as read</span>
+											<span class="notification-title" id="notification-title" data-i18n="new Notification"><?= get_new_notify_count() ?> new Notification</span>
+											<span class="text-bold-400 cursor-pointer" id="mark-as-all-btn" data-i18n="Mark" data-user-id="<?= current_customer_id()?>">Mark all as read</span>
 										</div>
 									<?php else: ?>
 										<div class="dropdown-header px-1 py-75 d-flex justify-content-between">
-											<span class="notification-title" id="notification-title">No new notification</span>
+											<span class="notification-title" id="notification-title" data-i18n="No new">No new notification</span>
 										</div>
 									<?php endif;?>
 								</li>
@@ -106,7 +106,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 											<div class="media d-flex align-items-center">
 												<div class="media-body">
 													<h6 class="media-heading">
-														<span class="text-bold-500">There are no new notifications.</span>
+														<span class="text-bold-500" data-i18n="There is no new">There is no new notifications.</span>
 													</h6>
 												</div>
 											</div>
@@ -120,25 +120,25 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								<div class="user-nav d-sm-flex d-none">
 									<span class="user-name"><?= $this->session->user['first_name'] . ' ' . $this->session->user['surname'] ?></span>
 									<?php if (is_admin()): ?>
-										<span class="user-status">Administrator</span>
+										<span class="user-status" data-i18n="Admin">Administrator</span>
 									<?php else:?>
-										<span class="user-status">Customer</span>
+										<span class="user-status" data-i18n="Customer">Customer</span>
 									<?php endif;?>
 								</div>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
 								<?php if (!is_admin()): ?>
 									<a class="dropdown-item" href="<?= base_url('bills')?>">
-										<i class="bx bx-envelope mr-50"></i> My Bills
+										<i class="bx bx-envelope mr-50"></i> Mis facturas
 									</a>
 									<div class="dropdown-divider"></div>
 								<?php endif;?>
 								<a class="dropdown-item" href="<?= base_url('auth/change')?>">
-									<i class="bx bx-cog mr-50"></i> Setting
+									<i class="bx bx-cog mr-50"></i> Configuración
 								</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="<?= base_url('auth/logout')?>">
-									<i class="bx bx-power-off mr-50"></i> Logout
+									<i class="bx bx-power-off mr-50"></i> Cerrar sesión
 								</a>
 							</div>
 						</li>

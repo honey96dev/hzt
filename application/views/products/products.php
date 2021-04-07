@@ -5,7 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<!-- Description -->
 	<section class="card">
 		<div class="card-header">
-			<h4 class="card-title" data-i18n="Customers">Products</h4>
+			<h4 class="card-title" data-i18n="Products">Products</h4>
 			<div class="manage-buttons">
 				<a class="btn btn-primary btn-sm glow mr-1 mb-1" href="<?= $create_url?>">
 					<i class="bx bx-plus"></i>
@@ -20,28 +20,28 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<thead>
 							<tr>
 								<th rowspan="2" data-i18n="Name">Name</th>
-								<th colspan="3" data-i18n="">Billed Number</th>
-								<th colspan="3" data-i18n="">Billed Amount</th>
-								<th colspan="3" data-i18n="">Billed Quantity</th>
+								<th colspan="3" data-i18n="Billed Number">Billed Number</th>
+								<th colspan="3" data-i18n="Billed Amount">Billed Amount</th>
+								<th colspan="3" data-i18n="Billed Quantity">Billed Quantity</th>
 								<th rowspan="2" data-i18n="Register Date">Register Date</th>
 								<th rowspan="2"></th>
 							</tr>
 							<tr>
-								<th>Paid</th>
-								<th>Unpaid</th>
-								<th>Confirmed</th>
-								<th>Paid</th>
-								<th>Unpaid</th>
-								<th>Confirmed</th>
-								<th>Paid</th>
-								<th>Unpaid</th>
-								<th>Confirmed</th>
+								<th data-i18n="Paid">Paid</th>
+								<th data-i18n="Unpaid">Unpaid</th>
+								<th data-i18n="Confirmed">Confirmed</th>
+								<th data-i18n="Paid">Paid</th>
+								<th data-i18n="Unpaid">Unpaid</th>
+								<th data-i18n="Confirmed">Confirmed</th>
+								<th data-i18n="Paid">Paid</th>
+								<th data-i18n="Unpaid">Unpaid</th>
+								<th data-i18n="Confirmed">Confirmed</th>
 							</tr>
 						</thead>
 						<tbody>
 						<?php if (empty($products)):?>
 							<tr>
-								<td colspan=11>There are no products.</td>
+								<td colspan=11>No hay productos</td>
 							</tr>
 						<?php else: ?>
 							<?php foreach($products as $product) :?>
@@ -80,8 +80,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 											<span class="bx bx-dots-vertical-rounded font-medium-3 dropdown-toggle nav-hide-arrow cursor-pointer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" role="menu">
 											</span>
 											<div class="dropdown-menu dropdown-menu-right">
-												<a class="dropdown-item" href="<?= $update_url . '/' . $product['id'] ?>"><i class="bx bx-edit-alt mr-1"></i> edit</a>
-												<a class="dropdown-item delete-cusomer-btn" href="<?= $delete_url . '/' . $product['id'] ?>"><i class="bx bx-trash mr-1"></i> delete</a>
+												<a class="dropdown-item" href="<?= $update_url . '/' . $product['id'] ?>"><i class="bx bx-edit-alt mr-1"></i> Editar</a>
+												<a class="dropdown-item delete-cusomer-btn" href="<?= $delete_url . '/' . $product['id'] ?>"><i class="bx bx-trash mr-1"></i> Eliminar</a>
 											</div>
 										</div>
 									</td>
