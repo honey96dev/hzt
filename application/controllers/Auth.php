@@ -89,7 +89,7 @@ class Auth extends CI_Controller
         $id = current_customer_id();
 
         $header_data = [
-            'title' => 'Change settings',
+            'title' => 'Cambiar ajustes',
             'change_action_url' => base_url('auth/change_action/' . $id),
         ];
 

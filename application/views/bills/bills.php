@@ -27,7 +27,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									<th data-i18n="Customer">Customer</th>
 									<th data-i18n="Company">Company</th>
 								<?php endif;?>
-								<th data-i18n="">Attachment</th>
+								<th data-i18n="Attachment">Attachment</th>
 								<th data-i18n="Product">Product</th>
 								<th data-i18n="Quantity">Quantity</th>
 								<th data-i18n="Amount">Amount</th>
