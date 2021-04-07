@@ -56,6 +56,15 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     <input type="text" name="last_name" class="form-control" data-validation-required-message="Last name is required." placeholder="Apellido" value="<?= $user['surname']?>">
                                 </div>
                             </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01" data-i18n="Avatar">Avatar</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="bill-file" aria-describedby="inputGroupFileAddon01" name="avatar">
+                                    <label class="custom-file-label" for="bill-file" data-i18n="Choose File">Choose file</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary" data-i18n="Submit">Submit</button>

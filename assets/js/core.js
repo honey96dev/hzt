@@ -175,10 +175,7 @@ $(document).ready(function () {
 		e.preventDefault();
 		let form = $(this);
 
-		$.ajax({
-			url: form.attr("action"),
-			type: form.attr("method"),
-			data: form.serialize(),
+		$(form).ajaxSubmit({
 			dataType: "json",
 			success: function (res) {
 				if (res.result == "success") {

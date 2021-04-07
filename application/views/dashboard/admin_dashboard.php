@@ -77,18 +77,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 												<tbody>
 													<?php foreach($products as $product): ?>
 													<tr>
-														<td class="pr-75">
+														<td class="">
 															<div class="media align-items-center">
 																<div class="media-body">
 																	<h6 class="media-heading mb-0"><?= $product['product_name'] ?></h6>
 																</div>
 															</div>
 														</td>
+														<td class="">
+															<?= $product['billed_quantity']['paid'] + $product['billed_quantity']['unpaid'] + $product['billed_quantity']['confirmed']?> kg
+														</td>
 														<td class="px-0 w-25">
 															$ <?= $product['billed_amount']['paid'] + $product['billed_amount']['unpaid'] + $product['billed_amount']['confirmed']?>
-														</td>
-														<td class="text-center">
-															<?= $product['billed_quantity']['paid'] + $product['billed_quantity']['unpaid'] + $product['billed_quantity']['confirmed']?> kg
 														</td>
 													</tr>
 													<?php endforeach;?>
