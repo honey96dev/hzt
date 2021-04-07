@@ -28,6 +28,7 @@ class Dashboard extends CI_Controller
             'total_unpaid_amount' => $this->bills->get_total_billing_amount_by_status(0),
             'customer_list' => $this->customers->get_customer_list(),
             'get_summary_chart_data' => base_url('dashboard/get_summary_chart_data'),
+            'products' => $this->products->get_product_list()
         ];
 
         $billing_summary_axis = [];
@@ -78,25 +79,6 @@ class Dashboard extends CI_Controller
         }
         $data['paid_bill'] = $paid_bill;
         $data['unpaid_bill'] = $unpaid_bill;
-        
-        $products_axis = $this->bills->get_products_list_for_chart();
-        $data['products_axis'] = $this->get_products_name_for_chart($products_axis);
-
-        $products_paid = [];
-        $products_unpaid = [];
-        $products_confirmed = [];
-        for ($i = 0, $l = count($products_axis); $i < $l; $i++) {
-            $item_paid = $this->bills->get_amount_per_product(1, $products_axis[$i]);
-            $products_paid[] = $item_paid;
-            $item_unpaid = $this->bills->get_amount_per_product(0, $products_axis[$i]);
-            $products_unpaid[] = $item_unpaid;
-            $item_confirmed = $this->bills->get_amount_per_product(2, $products_axis[$i]);
-            $products_confirmed[] = $item_confirmed;
-        }
-
-        $data['products_paid'] = $products_paid;
-        $data['products_unpaid'] = $products_unpaid;
-        $data['products_confirmed'] = $products_confirmed;
 
         $this->load->view('includes/header', $header_data);
         $this->load->view('dashboard/admin_dashboard', $data);
@@ -162,6 +144,7 @@ class Dashboard extends CI_Controller
             'goal_status_percent' => $percent,
             'bill_list' => $this->bills->get_bill_list('user_id = ' . $customer_id, 0, 0, 'bill_date', 'desc'),
             'get_history_chart_data' => base_url('dashboard/get_history_chart_data'),
+            'products' => $this->products->get_product_list('', 'updated_at', 'desc', $customer_id)
         ];
 
         $bill_history_axis = [];
@@ -192,25 +175,6 @@ class Dashboard extends CI_Controller
         $data['billing_history_paid'] = $billing_paid_value;
         $data['billing_history_unpaid'] = $billing_unpaid_value;
         $data['billing_history_confirmed'] = $billing_confirmed_value;
-
-        $products_axis = $this->bills->get_products_list_for_chart();
-        $data['products_axis'] = $this->get_products_name_for_chart($products_axis);
-        
-        $products_paid = [];
-        $products_unpaid = [];
-        $products_confirmed = [];
-        for ($i = 0, $l = count($products_axis); $i < $l; $i++) {
-            $item_paid = $this->bills->get_amount_per_product(1, substr($products_axis[$i], 1, -1), $customer_id);
-            $products_paid[] = $item_paid;
-            $item_unpaid = $this->bills->get_amount_per_product(0, substr($products_axis[$i], 1, -1), $customer_id);
-            $products_unpaid[] = $item_unpaid;
-            $item_confirmed = $this->bills->get_amount_per_product(2, substr($products_axis[$i], 1, -1), $customer_id);
-            $products_confirmed[] = $item_confirmed;
-        }
-
-        $data['products_paid'] = $products_paid;
-        $data['products_unpaid'] = $products_unpaid;
-        $data['products_confirmed'] = $products_confirmed;
 
         $this->load->view('includes/header', $header_data);
         $this->load->view('dashboard/customer_dashboard', $data);

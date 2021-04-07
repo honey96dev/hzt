@@ -78,3 +78,15 @@ a.btn {
 	width: 3px;
 }
 
+.product-summary .card-content {
+	height: 245px;
+}
+
+.product-summary .card-content .card-body {
+	height: 95%;
+	overflow: auto;
+}
+
+.product-summary .card-body::-webkit-scrollbar {
+	width: 0px;
+}

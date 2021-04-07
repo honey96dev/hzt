@@ -17,7 +17,7 @@ class Products_model extends CI_Model
      * @return Array of result
      * @param {String} filter
      */
-    public function get_product_list($filter = '', $order = 'updated_at', $order_by = 'desc')
+    public function get_product_list($filter = '', $order = 'updated_at', $order_by = 'desc', $customer_id = 0)
     {
         $this->db->from($this->table);
         if ($filter != '') {
@@ -32,21 +32,21 @@ class Products_model extends CI_Model
             for($i = 0, $l = count($result); $i < $l; $i++) {
                 $res[$i] = $result[$i];
                 $res[$i]['billed_amount'] = [
-                    'paid' => $this->bills->get_total_billing_amount_by_status(1, '', 0, $result[$i]['id']),
-                    'unpaid' => $this->bills->get_total_billing_amount_by_status(0, '', 0, $result[$i]['id']),
-                    'confirmed' => $this->bills->get_total_billing_amount_by_status(2, '', 0, $result[$i]['id'])
+                    'paid' => $this->bills->get_total_billing_amount_by_status(1, '', $customer_id, $result[$i]['id']),
+                    'unpaid' => $this->bills->get_total_billing_amount_by_status(0, '', $customer_id, $result[$i]['id']),
+                    'confirmed' => $this->bills->get_total_billing_amount_by_status(2, '', $customer_id, $result[$i]['id'])
                 ];
 
                 $res[$i]['billed_quantity'] = [
-                    'paid' => $this->bills->get_amount_per_product(1, $result[$i]['id']),
-                    'unpaid' => $this->bills->get_amount_per_product(0, $result[$i]['id']),
-                    'confirmed' => $this->bills->get_amount_per_product(2, $result[$i]['id'])
+                    'paid' => $this->bills->get_amount_per_product(1, $result[$i]['id'], $customer_id),
+                    'unpaid' => $this->bills->get_amount_per_product(0, $result[$i]['id'], $customer_id),
+                    'confirmed' => $this->bills->get_amount_per_product(2, $result[$i]['id'], $customer_id)
                 ];
-
+                $slug = $customer_id != 0 ? ' AND user_id = ' . $customer_id : '';
                 $res[$i]['billed_number'] = [
-                    'paid' => $this->bills->get_bill_count('status = 1 AND product_id = ' . $result[$i]['id']),
-                    'unpaid' => $this->bills->get_bill_count('status = 0 AND product_id = ' . $result[$i]['id']),
-                    'confirmed' => $this->bills->get_bill_count('status = 2 AND product_id = ' . $result[$i]['id'])
+                    'paid' => $this->bills->get_bill_count('status = 1 AND product_id = ' . $result[$i]['id'] . $slug),
+                    'unpaid' => $this->bills->get_bill_count('status = 0 AND product_id = ' . $result[$i]['id'] . $slug),
+                    'confirmed' => $this->bills->get_bill_count('status = 2 AND product_id = ' . $result[$i]['id'] . $slug)
                 ];
             }
         }
