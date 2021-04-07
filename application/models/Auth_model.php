@@ -119,6 +119,7 @@ class Auth_model extends CI_Model
             'user_name' => $settings['username'],
             'first_name' => $settings['first_name'],
             'surname' => $settings['last_name'],
+            'avatar'  => $settings['avatar'],
             'updated_at' => date('Y-m-d H:i:s')
         ];
 

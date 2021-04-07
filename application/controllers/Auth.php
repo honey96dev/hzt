@@ -105,6 +105,25 @@ class Auth extends CI_Controller
     public function change_action($id = 0) {
         if ($this->input->post()) {
             $settings = $this->input->post();
+            $config['upload_path'] = PROFILE_IMAGE_PATH;
+            $config['allowed_types']        = 'jpg|jpeg|png|bmp';
+            $config['max_size'] = 10240;
+            $config['file_name'] = md5(time());
+
+            $this->load->library('upload', $config);
+            $origin_user = $this->customers->get_customer_by_id($id);
+            if ( $this->upload->do_upload('avatar')) {
+                $origin_file_path = PROFILE_IMAGE_PATH . $origin_user['avatar'];
+                if (@file_exists($origin_user)) {
+                    @unlink($origin_user);
+                }
+                $upload_info = $this->upload->data();
+
+                $settings['avatar'] = $upload_info['file_name'];
+            } else {
+                echo  $this->upload->display_errors();
+                $settings['avatar'] = $origin_user['avatar'];
+            }
             $result = $this->auth->change($id, $settings);
             echo json_encode($result);
         } else {

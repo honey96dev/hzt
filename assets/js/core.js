@@ -175,10 +175,7 @@ $(document).ready(function () {
 		e.preventDefault();
 		let form = $(this);
 
-		$.ajax({
-			url: form.attr("action"),
-			type: form.attr("method"),
-			data: form.serialize(),
+		$(form).ajaxSubmit({
 			dataType: "json",
 			success: function (res) {
 				if (res.result == "success") {
@@ -637,107 +634,6 @@ $(document).ready(function () {
 
 		var analyticsBarChart = new ApexCharts(
 			document.querySelector("#analytics-bar-chart"),
-			analyticsBarChartOptions
-		);
-
-		analyticsBarChart.render();
-	}
-
-	if ($("#products-bar-chart").length) {
-		var analyticsBarChartOptions = {
-			chart: {
-				height: 215,
-				width: "100%",
-				type: "bar",
-				toolbar: {
-					show: false,
-				},
-			},
-      stroke: {
-				curve: "smooth",
-			},
-			plotOptions: {
-				bar: {
-					horizontal: true,
-					columnWidth: "50%",
-					endingShape: "rounded",
-				},
-			},
-			legend: {
-				horizontalAlign: "right",
-				offsetY: -10,
-				markers: {
-					radius: 0,
-					height: 8,
-					width: 8,
-				},
-			},
-			dataLabels: {
-				enabled: false,
-			},
-			colors: [$primary, $danger, $warning],
-			fill: {
-				type: "gradient",
-				gradient: {
-					shade: "light",
-					type: "vertical",
-					inverseColors: true,
-					opacityFrom: 1,
-					opacityTo: 1,
-					stops: [0, 70, 100],
-				},
-			},
-			series: [
-				{
-					name: "Pagado",
-					data: products_paid,
-				},
-				{
-					name: "No pagado",
-					data: products_unpaid,
-				},
-        {
-					name: "Confirmed",
-					data: products_confirmed,
-				},
-			],
-			xaxis: {
-				categories: products_axis,
-				axisBorder: {
-					show: false,
-				},
-				axisTicks: {
-					show: false,
-				},
-				labels: {
-					style: {
-						colors: $gray_light,
-					},
-				},
-			},
-			yaxis: {
-				min: 0,
-				tickAmount: 3,
-				labels: {
-					style: {
-						color: $gray_light,
-					},
-				},
-			},
-			legend: {
-				show: false,
-			},
-			tooltip: {
-				y: {
-					formatter: function (val) {
-						return val + "kg";
-					},
-				},
-			},
-		};
-
-		var analyticsBarChart = new ApexCharts(
-			document.querySelector("#products-bar-chart"),
 			analyticsBarChartOptions
 		);
 

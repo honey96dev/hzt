@@ -67,13 +67,33 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<div class="col-md-6 col-12">
 						<div class="row">
 							<div class="col-12">
-								<div class="card">
+								<div class="card product-summary">
 									<div class="card-header d-flex justify-content-between align-items-center">
 										<h4 class="card-title">Resumen de productos</h4>
 									</div>
 									<div class="card-content">
 										<div class="card-body pb-1">
-											<div id="products-bar-chart"></div>
+											<table class="table table-borderless widget-earnings-width mb-0">
+												<tbody>
+													<?php foreach($products as $product): ?>
+													<tr>
+														<td class="">
+															<div class="media align-items-center">
+																<div class="media-body">
+																	<h6 class="media-heading mb-0"><?= $product['product_name'] ?></h6>
+																</div>
+															</div>
+														</td>
+														<td class="">
+															<?= $product['billed_quantity']['paid'] + $product['billed_quantity']['unpaid'] + $product['billed_quantity']['confirmed']?> kg
+														</td>
+														<td class="px-0 w-25">
+															$ <?= $product['billed_amount']['paid'] + $product['billed_amount']['unpaid'] + $product['billed_amount']['confirmed']?>
+														</td>
+													</tr>
+													<?php endforeach;?>
+												</tbody>
+											</table>
 										</div>
 									</div>
 								</div>
@@ -209,9 +229,5 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	let bill_axis = [<?= implode(',', $bill_axis)?>];
 	let paid_bill = [<?= implode(',', $paid_bill)?>];
 	let unpaid_bill = [<?= implode(',', $unpaid_bill)?>];
-	let products_axis = [<?= implode(',', $products_axis)?>];
-	let products_paid = [<?= implode(',', $products_paid)?>];
-	let products_unpaid = [<?= implode(',', $products_unpaid)?>];
-	let products_confirmed = [<?= implode(',', $products_confirmed)?>];
 	let get_summary_chart_data = "<?= $get_summary_chart_data?>";
 </script>
