@@ -11,7 +11,7 @@
  Target Server Version : 100406
  File Encoding         : 65001
 
- Date: 05/04/2021 22:29:36
+ Date: 09/04/2021 05:27:57
 */
 
 SET NAMES utf8mb4;
@@ -132,14 +132,15 @@ CREATE TABLE `users`  (
   `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `is_verified` int(1) NULL DEFAULT 0,
   `goal_status` double(10, 2) NULL DEFAULT 0,
+  `avatar` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (2, 'john123', 'John', 'Marko', 'f5bb0c8de146c67b44babbf4e6584cc0', 1, 1, 1000.50, '2021-03-22 22:58:40', '2021-03-30 22:51:18', 'info@john.com', 0, 2328.70);
-INSERT INTO `users` VALUES (4, 'richmond', 'Richmond', 'Handson', 'fba390e8f139bedc115d6489af4fcb72', 0, 0, 1200.00, '2021-03-22 23:02:42', '2021-03-27 09:26:18', 'info@richmond.com', 0, 451.00);
-INSERT INTO `users` VALUES (5, 'honeydev', 'Honey', 'Dev', 'fba390e8f139bedc115d6489af4fcb72', 0, 1, 1500.00, '2021-03-23 22:25:37', '2021-04-05 11:05:27', 'honeydev@gmail.com', 0, 1680.00);
+INSERT INTO `users` VALUES (2, 'john123', 'John', 'Marko', 'f5bb0c8de146c67b44babbf4e6584cc0', 1, 1, 1000.50, '2021-03-22 22:58:40', '2021-03-30 22:51:18', 'info@john.com', 0, 2328.70, NULL);
+INSERT INTO `users` VALUES (4, 'richmond', 'Richmond', 'Handson', 'fba390e8f139bedc115d6489af4fcb72', 0, 0, 1200.00, '2021-03-22 23:02:42', '2021-03-27 09:26:18', 'info@richmond.com', 0, 451.00, NULL);
+INSERT INTO `users` VALUES (5, 'honeydev', 'Honey', 'Dev', 'fba390e8f139bedc115d6489af4fcb72', 0, 1, 1500.00, '2021-03-23 22:25:37', '2021-04-08 15:23:10', 'honeydev@gmail.com', 0, 1680.00, 'ab25dc5932280a9e72b6b9865a3fd01a.png');
 
 SET FOREIGN_KEY_CHECKS = 1;

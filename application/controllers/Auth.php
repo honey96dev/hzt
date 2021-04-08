@@ -75,7 +75,7 @@ class Auth extends CI_Controller
 
     public function forgot_action()
     {
-
+        
     }
 
     public function logout()
