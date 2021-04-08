@@ -90,3 +90,10 @@ defined('BILLING_DOC_PATH')      OR define('BILLING_DOC_PATH', FCPATH . 'uploads
 
 defined('PROFILE_IMAGE_URL')      OR define('PROFILE_IMAGE_URL', 'uploads/profile/');
 defined('BILLING_DOC_URL')      OR define('BILLING_DOC_URL', 'uploads/bills/');
+
+defined('SMTP_HOST')      OR define('SMTP_HOST', "ssl://smtp.googlemail.com");
+defined('SMTP_PORT')      OR define('SMTP_PORT', 465);
+defined('SMTP_USER')      OR define('SMTP_USER', "godknight122@gmail.com");
+defined('SMTP_PASSWORD')      OR define('SMTP_PASSWORD', "skdmlEmail@123456");
+defined('COMPANY_EMAIL')      OR define('COMPANY_EMAIL', "godknight122@gmail.com");
+defined('COMPANY_NAME')      OR define('COMPANY_NAME', "Comercio");

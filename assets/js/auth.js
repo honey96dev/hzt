@@ -60,4 +60,32 @@ $(document).ready(function() {
 			},
 		});
 	});
+
+	/**
+	 * Forgot Password Page
+	 */
+	$("form#forgot-password-form").on("submit", function(e) {
+		e.preventDefault();
+		let form = $(this);
+
+		$.ajax({
+			url: form.attr("action"),
+      type: form.attr("method"),
+      data: form.serialize(),
+      dataType: "json",
+      success: function(res) {
+        if (res.result == "success") {
+          toastr.success("Sent reset-password link to your email. Please check your mail inbox.", "", { progressBar: true })
+        } else if (res.result == "not-exist") {
+          toastr.warning("This email is not exist. Please register your information first.", "Failed...", { progressBar: true });
+        } else {
+          toastr.warning(res.msg, "Failed...", { progressBar: true });
+        }
+      },
+      error: function(err) {
+        toastr.warning(res.msg, "Failed...", { progressBar: true });
+      }
+		})
+	});
+
 });

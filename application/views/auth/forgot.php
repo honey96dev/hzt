@@ -37,10 +37,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             Ingrese el correo electrónico que utilizó cuando se inscribió y le enviaremos una contraseña temporal.
                                         </small>
                                     </div>
-                                    <form class="mb-2" action="index.html">
+                                    <form class="mb-2" id="forgot-password-form" action="<?= $forgot_action_url?>" method="POST">
                                         <div class="form-group mb-2">
-                                            <label class="text-bold-600" for="exampleInputEmailPhone1">Email</label>
-                                            <input type="text" class="form-control" id="exampleInputEmailPhone1" placeholder="Email">
+                                            <label class="text-bold-600" for="user_email">Email</label>
+                                            <input type="text" class="form-control" id="user_email" name="email" placeholder="Email">
                                         </div>
                                         <button type="submit" class="btn btn-primary glow position-relative w-100">
                                             Enviar contraseña<i id="icon-arrow" class="bx bx-right-arrow-alt"></i>

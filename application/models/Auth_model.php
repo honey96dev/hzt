@@ -133,4 +133,48 @@ class Auth_model extends CI_Model
             return ['result' => 'error'];
         }
     }
+
+    public function update_verify_code($customer_id = 0) {
+        if ($customer_id == 0) {
+            return false;
+        }
+
+        return $this->db->update($this->table, ['is_verified' => md5(time())], ['id' => $customer_id]);
+    }
+
+    public function send_verify_email($customer_id = 0) {
+        if ($customer_id == 0) {
+            return false;
+        }
+        
+        $customer = $this->customers->get_customer_by_id($customer_id);
+
+        $config = Array(
+            'protocol' => 'smtp',
+            'smtp_host' => SMTP_HOST,
+            'smtp_port' => SMTP_PORT,
+            'smtp_user' => SMTP_USER,
+            'smtp_pass' => SMTP_PASSWORD,
+            'mailtype'  => 'html',
+            'charset'   => 'iso-8859-1'
+        );
+        $this->load->library('email', $config);
+        $this->email->from(COMPANY_EMAIL, COMPANY_NAME);
+        $this->email->to($customer['email']);
+
+        $this->email->subject('Email Test');
+        $this->email->message('Testing the email class.');
+        $this->email->set_newline("\r\n");
+                        
+        $result = $this->email->send();
+    }
+
+    public function update_password($hash = '') {
+        $customers = $this->customers->get_customer_list('is_verified = "' . $hash . '"');
+        if (count($customers) > 0) {
+            return $this->db->update($this->table, ['password' => generate_password($customers[0]['email'])], ['id' => $customers[0]['id']]);
+        } else {
+            return false;
+        }
+    }
 }

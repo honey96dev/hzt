@@ -75,7 +75,41 @@ class Auth extends CI_Controller
 
     public function forgot_action()
     {
-        
+        if ($this->input->post()) {
+            $data = $this->input->post();
+            $email = $data['email'];
+            $customer = $this->customers->get_customer_by_email($email);
+            if (!isset($customer['id']) || $customer['id'] == '') {
+                echo json_encode(['result' => 'not-exist']);
+                return;
+            }
+            if ($customer['is_verified'] != '') {
+                $this->auth->send_verify_email($customer['id']);
+            } else {
+                $this->auth->update_verify_code($customer['id']);
+                $this->auth->send_verify_email($customer['id']);
+            }
+            echo json_encode(['result' => 'success']);
+            return;
+        } else {
+            echo json_encode(['result' => 'failed']);
+            return;
+        }
+    }
+
+    public function verify_password($hash = '') {
+        if ($hash == '') {
+            redirect('auth');
+        }
+
+        $data = [
+            'login_url' => base_url('auth'),
+            'info' => $this->auth->update_password($hash) ? 'success' : 'failed'
+        ];
+
+        $this->load->view('includes/blank_header');
+        $this->load->view('auth/notify', $data);
+        $this->load->view('includes/blank_footer');
     }
 
     public function logout()
