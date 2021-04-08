@@ -71,3 +71,17 @@ function get_diff_between_two_dates($start, $end)
 
     return round(($ts2 - $ts1) / (60 * 60 * 24));
 }
+
+function get_profile_image_url() {
+    $CI = &get_instance();
+    if (!$CI->session->has_userdata('user')) {
+        return false;
+    }
+    $CI->load->model('customers_model', 'customers');
+    $customer = $CI->customers->get_customer_by_id($CI->session->user['id']);
+    if ($customer['avatar'] != '') {
+        return PROFILE_IMAGE_URL . $customer['avatar'];
+    } else {
+        return 'app-assets/images/pages/default.png';
+    }
+}

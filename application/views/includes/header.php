@@ -124,7 +124,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									<?php else:?>
 										<span class="user-status" data-i18n="Customer">Customer</span>
 									<?php endif;?>
+									
 								</div>
+								<span>
+									<img class="round" src="<?= base_url(). get_profile_image_url()?>" alt="avatar" height="40" width="40">
+								</span>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
 								<?php if (!is_admin()): ?>
