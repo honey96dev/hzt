@@ -164,8 +164,8 @@
   "No new": "Sin notificación nueva",
   "There is no new": "No hay nueva notificación",
   "Admin": "Administrador",
-  "My Goal": "Mi meta",
-  "Bills Timeline": "Cronología facturas",
+  "My Goal": "Mi Objetivo",
+  "Bills Timeline": "Cronograma de facturas",
   "Paid": "Pagado",
   "Confirmed": "Confirmado",
   "Unpaid": "No pagado",
@@ -187,5 +187,6 @@
   "First Name": "Primer nombre",
   "Last Name": "Apellido",
   "Customer Information": "Información del cliente",
-  "Product Information": "Información del Producto"
+  "Product Information": "Información del Producto",
+  "Attachment": "Adjunto archivo"
 }
