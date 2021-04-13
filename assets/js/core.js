@@ -113,7 +113,11 @@ $(document).ready(function () {
 	/**
 	 * Bill Management Page
 	 */
-	$(".bill-table").DataTable();
+	$(".bill-table").DataTable(
+		{
+			"order": [[ 0, "desc" ]]
+		} 
+	);
 	$(".delete-bill-btn").on("click", function (e) {
 		if (!confirm("Do you really want to remove this bill?")) {
 			e.preventDefault();
@@ -454,7 +458,6 @@ $(document).ready(function () {
 		drawBillingHistoryChart(
 			history_paid,
 			history_unpaid,
-			history_confirmed,
 			bill_history_axis
 		);
 	}
@@ -541,7 +544,7 @@ $(document).ready(function () {
 		orderSummaryChart.render();
 	}
 
-	function drawBillingHistoryChart(paid, unpaid, confirmed, axis) {
+	function drawBillingHistoryChart(paid, unpaid, axis) {
 		$("#analytics-bar-chart").html("");
 		var analyticsBarChartOptions = {
 			chart: {
@@ -571,7 +574,7 @@ $(document).ready(function () {
 			dataLabels: {
 				enabled: false,
 			},
-			colors: [$primary, $danger, $warning],
+			colors: [$primary, $danger],
 			fill: {
 				type: "gradient",
 				gradient: {
@@ -591,10 +594,6 @@ $(document).ready(function () {
 				{
 					name: "No pagado",
 					data: unpaid,
-				},
-				{
-					name: "Confirmed",
-					data: confirmed,
 				},
 			],
 			xaxis: {

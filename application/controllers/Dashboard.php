@@ -142,7 +142,7 @@ class Dashboard extends CI_Controller
             'total_paid_amount' => $this->bills->get_total_billing_amount_by_status(1, '', $customer_id),
             'total_unpaid_amount' => $this->bills->get_total_billing_amount_by_status(0, '', $customer_id),
             'goal_status_percent' => $percent,
-            'bill_list' => $this->bills->get_bill_list('user_id = ' . $customer_id, 0, 0, 'bill_date', 'desc'),
+            'bill_list' => $this->bills->get_bill_list('bills.status != 2 AND user_id = ' . $customer_id, 0, 0, 'bill_date', 'desc'),
             'get_history_chart_data' => base_url('dashboard/get_history_chart_data'),
             'products' => $this->products->get_product_list('', 'updated_at', 'desc', $customer_id)
         ];
