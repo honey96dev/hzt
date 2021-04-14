@@ -57,7 +57,7 @@ class Bills extends CI_Controller
 
             $config['upload_path'] = BILLING_DOC_PATH;
             $config['allowed_types']        = 'pdf|doc|docx|rar|zip';
-            $config['max_size'] = 10240;
+            $config['max_size'] = 102400;
             $config['file_name'] = md5(time());
 
             $this->load->library('upload', $config);
@@ -109,7 +109,7 @@ class Bills extends CI_Controller
             $new_data = $this->input->post();
             $config['upload_path'] = BILLING_DOC_PATH;
             $config['allowed_types']        = 'pdf|doc|docx|rar|zip';
-            $config['max_size'] = 10240;
+            $config['max_size'] = 102400;
             $config['file_name'] = md5(time());
 
             $this->load->library('upload', $config);
