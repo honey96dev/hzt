@@ -199,7 +199,7 @@ class Customers_model extends CI_Model
         if ($id == 0) {
             return false;
         }
-        $this->db->delete($this->bills_table, ['user_id' => $id]);
+        $this->db->delete($this->bill_table, ['user_id' => $id]);
         return $this->db->delete($this->table, ['id' => $id]);
     }
 }
