@@ -10,6 +10,7 @@ class Customers_model extends CI_Model
     {
         parent::__construct();
         $this->table = 'users';
+        $this->bill_table = 'bills';
         $this->load->model('bills_model', 'bills');
         $this->load->model('notifications_model', 'notifications');
     }
@@ -198,7 +199,7 @@ class Customers_model extends CI_Model
         if ($id == 0) {
             return false;
         }
-
+        $this->db->delete($this->bills_table, ['user_id' => $id]);
         return $this->db->delete($this->table, ['id' => $id]);
     }
 }

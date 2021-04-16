@@ -20,7 +20,7 @@ class Customers extends CI_Controller
             'customers' => $this->customers->get_customer_list(),
             'create_url' => base_url('customers/create'),
             'update_url' => base_url('customers/update'),
-            'delete_url' => base_url('/delete'),
+            'delete_url' => base_url('customers/delete'),
             'confirm_url' => base_url('customers/confirm'),
         ];
 

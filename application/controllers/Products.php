@@ -20,7 +20,7 @@ class Products extends CI_Controller
             'products' => $this->products->get_product_list(),
             'create_url' => base_url('products/create'),
             'update_url' => base_url('products/update'),
-            'delete_url' => base_url('/delete'),
+            'delete_url' => base_url('products/delete'),
             'confirm_url' => base_url('products/confirm'),
         ];
 
