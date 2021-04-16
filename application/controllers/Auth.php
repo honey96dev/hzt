@@ -155,7 +155,6 @@ class Auth extends CI_Controller
 
                 $settings['avatar'] = $upload_info['file_name'];
             } else {
-                echo  $this->upload->display_errors();
                 $settings['avatar'] = $origin_user['avatar'];
             }
             $result = $this->auth->change($id, $settings);

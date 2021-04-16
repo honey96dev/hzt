@@ -123,7 +123,7 @@ class Auth_model extends CI_Model
             'updated_at' => date('Y-m-d H:i:s')
         ];
 
-        if ($settings['current_password'] != '') {
+        if ($settings['current_password'] != '' && $settings['password'] != '') {
             $new_settings['password'] = generate_password($settings['password']);
         }
 
