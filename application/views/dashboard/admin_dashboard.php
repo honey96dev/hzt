@@ -73,19 +73,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									</div>
 									<div class="card-content">
 										<div class="card-body pb-1">
-											<table class="table table-borderless widget-earnings-width mb-0">
+											<table class="table table-border widget-earnings-width mb-0">
 												<tbody>
 													<?php foreach($products as $product): ?>
 													<tr>
-														<td class="">
+														<td class="px-0">
 															<div class="media align-items-center">
 																<div class="media-body">
 																	<h6 class="media-heading mb-0"><?= $product['product_name'] ?></h6>
 																</div>
 															</div>
 														</td>
-														<td class="">
-															<?= $product['billed_quantity']['paid'] + $product['billed_quantity']['unpaid'] + $product['billed_quantity']['confirmed']?> kg
+														<td class="px-0">
+															<?= $product['billed_quantity']['paid'] + $product['billed_quantity']['unpaid'] + $product['billed_quantity']['confirmed']?> KG
 														</td>
 														<td class="px-0 w-25">
 															$ <?= $product['billed_amount']['paid'] + $product['billed_amount']['unpaid'] + $product['billed_amount']['confirmed']?>
