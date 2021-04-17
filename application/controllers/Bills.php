@@ -65,7 +65,7 @@ class Bills extends CI_Controller
                 $upload_info = $this->upload->data();
                 $new_data['bill_doc'] = $upload_info['file_name'];
             } else {
-                echo  $this->upload->display_errors();
+                // echo  $this->upload->display_errors();
                 $new_data['bill_doc'] = '';
             }
 

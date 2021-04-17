@@ -18,7 +18,7 @@ class Notifications_model extends CI_Model
     {
         $new_notification = [
             'user_id' => $customer_info['id'],
-            'detail' => 'Confirmed your goal status : $' . $customer_info['goal_status'] . ' You will receive $' . show_number($customer_info['goal_status'] / 50) . ' .',
+            'detail' => 'Confirmación the cumplimiento de objetivo : $' . $customer_info['goal_status'] . ' Recibirá $' . show_number($customer_info['goal_status'] / 50) . ' como nota de crédito en su próxima.',
             'created_at' => date('Y-m-d H:i:s'),
         ];
 
@@ -31,7 +31,7 @@ class Notifications_model extends CI_Model
 
         $new_notification = [
             'user_id' => $this->session->user['id'],
-            'detail' => $customer_info['first_name'] . ' ' . $customer_info['surname'] . ' has been reached goal score. $' . show_number($customer_info['goal']) . '/$' . show_number($customer_info['goal_status']) . ' .',
+            'detail' => $customer_info['first_name'] . ' ' . $customer_info['surname'] . ' alcanzado la meta. $' . show_number($customer_info['goal']) . '/$' . show_number($customer_info['goal_status']) . ' .',
             'created_at' => date('Y-m-d H:i:s'),
         ];
 
