@@ -84,10 +84,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 															</div>
 														</td>
 														<td class="">
-															<?= $product['billed_quantity']['paid'] + $product['billed_quantity']['unpaid'] + $product['billed_quantity']['confirmed']?> kg
+															<?= $product['billed_quantity']['paid'] + $product['billed_quantity']['unpaid']?> kg
 														</td>
 														<td class="px-0 w-25">
-															$ <?= $product['billed_amount']['paid'] + $product['billed_amount']['unpaid'] + $product['billed_amount']['confirmed']?>
+															$ <?= $product['billed_amount']['paid'] + $product['billed_amount']['unpaid']?>
 														</td>
 													</tr>
 													<?php endforeach;?>
